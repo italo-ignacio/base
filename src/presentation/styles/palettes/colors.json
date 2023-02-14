@@ -1,0 +1,9 @@
+{
+  "primary": "#FFC107",
+  "secondary": "#343A40",
+  "white": "#FFFFFF",
+  "bg": "#F3F3F3",
+  "gray": "#7C848A",
+  "error": "#F04100",
+  "transparent": "transparent"
+}
