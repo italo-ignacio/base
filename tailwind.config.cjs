@@ -7,8 +7,22 @@ module.exports = {
   content: ['./index.html', './src/**/*.tsx'],
   darkMode: ['class', '[data-mode="dark"]'],
   plugins: [
-    plugin(({ addVariant }) => {
-      addVariant('checked', '&[data-state="checked"]');
+    plugin(({ addBase }) => {
+      addBase({
+        '*::-webkit-scrollbar': {
+          width: '12px'
+        },
+        '*::-webkit-scrollbar-thumb': {
+          backgroundColor: '#343A40',
+          borderRadius: '10px'
+        },
+        '*::-webkit-scrollbar-track-piece': {
+          backgroundColor: '#E5E9EC',
+          borderRadius: '10px',
+          marginBottom: '1rem',
+          marginTop: '5rem'
+        }
+      });
     })
   ],
 

@@ -341,10 +341,7 @@
     "react/jsx-key": ["error", { "checkFragmentShorthand": false }],
     "react/jsx-max-depth": ["error", { "max": 8 }],
     "react/jsx-max-props-per-line": "off",
-    "react/jsx-newline": [
-      "error",
-      { "allowMultilines": true, "prevent": true }
-    ] /* Require or prevent a new line after jsx elements and expressions */,
+    "react/jsx-newline": "off" /* Require or prevent a new line after jsx elements and expressions */,
     "react/jsx-no-bind": "error",
     "react/jsx-no-comment-textnodes": "error",
     "react/jsx-no-constructed-context-values": "error",

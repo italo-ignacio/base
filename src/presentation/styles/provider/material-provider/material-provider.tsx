@@ -168,7 +168,7 @@ export const MaterialUIProvider: FC<Children> = ({ children }: Children) => {
             style: {
               ':focus-within': {
                 ':before': {
-                  borderBottom: `1px solid ${colors.primary} !important`
+                  borderBottom: `1px solid ${colors.primary}`
                 },
                 svg: {
                   color: `${colors.primary} !important`
@@ -180,7 +180,36 @@ export const MaterialUIProvider: FC<Children> = ({ children }: Children) => {
                 }
               },
               ':hover:before': {
-                borderBottom: `2px solid ${colors.secondary} !important`
+                borderBottom: `2px solid ${colors.secondary}`
+              }
+            }
+          },
+          {
+            props: { color: 'secondary' },
+            style: {
+              ':focus-within': {
+                ':after': {
+                  borderBottom: `2px solid ${colors.white}`
+                },
+                ':before': {
+                  borderBottom: `1.5px solid ${colors.white}`
+                },
+                svg: {
+                  color: `${colors.bg} `
+                }
+              },
+              ':hover': {
+                svg: {
+                  color: colors.white
+                }
+              },
+              ':hover:before': {
+                borderBottom: `1.5px solid ${colors.white}`
+              },
+              borderBottom: `1px solid ${colors.white}`,
+              color: colors.white,
+              svg: {
+                color: colors.bg
               }
             }
           },
@@ -188,20 +217,24 @@ export const MaterialUIProvider: FC<Children> = ({ children }: Children) => {
             props: { error: true },
             style: {
               ':focus-within': {
+                ':after': {
+                  borderBottom: `2px solid ${colors.error} !important`
+                },
+                ':before': {
+                  borderBottom: `1.5px solid ${colors.error} !important`
+                },
                 svg: {
                   color: `${colors.error} !important`
                 }
               },
-              ':hover': {
-                svg: {
-                  color: `${colors.error} !important`
-                }
-              },
+
               ':hover:before': {
                 borderBottom: `1.5px solid ${colors.error} !important`
               },
+              borderBottom: `1px solid ${colors.error} !important`,
+
               svg: {
-                color: colors.error
+                color: `${colors.error} !important`
               }
             }
           }
