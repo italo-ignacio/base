@@ -28,7 +28,11 @@ module.exports = {
 
   theme: {
     colors,
-    extend: {},
+    extend: {
+      fontFamily: {
+        montserrat: ['Montserrat']
+      }
+    },
     variants: {}
   }
 };

@@ -158,6 +158,31 @@ export const MaterialUIProvider: FC<Children> = ({ children }: Children) => {
           }
         ]
       },
+      MuiChip: {
+        defaultProps: {
+          style: {
+            backgroundColor: `${colors.primary}`,
+            color: `${colors.secondary}`,
+            fontFamily: 'Montserrat',
+            fontSize: '0.875rem',
+            fontWeight: 'bold',
+            height: '1.5rem',
+            width: 'max-content'
+          },
+          variant: 'filled'
+        },
+        variants: [
+          {
+            props: {
+              variant: 'outlined'
+            },
+            style: {
+              backgroundColor: `${colors.white} !important`,
+              border: `1px solid ${colors.secondary} `
+            }
+          }
+        ]
+      },
       MuiInput: {
         defaultProps: {
           color: 'primary'
@@ -315,6 +340,34 @@ export const MaterialUIProvider: FC<Children> = ({ children }: Children) => {
             }
           }
         ]
+      },
+      MuiTableCell: {
+        defaultProps: {
+          style: {
+            color: `${colors.gray}`,
+            fontFamily: 'Montserrat',
+            fontSize: 'clamp(.8rem, .9vw, 1.5rem)'
+          },
+          variant: 'body'
+        },
+        variants: [
+          {
+            props: {
+              variant: 'head'
+            },
+            style: {
+              color: `${colors.secondary} !important`,
+              fontWeight: 'bold'
+            }
+          }
+        ]
+      },
+      MuiTableHead: {
+        defaultProps: {
+          style: {
+            fontWeight: 'bold'
+          }
+        }
       },
       MuiTextField: {
         defaultProps: {
