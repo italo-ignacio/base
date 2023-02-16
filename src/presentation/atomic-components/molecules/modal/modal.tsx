@@ -1,6 +1,6 @@
 import { Box, Button, Modal as ModalUI } from '@mui/material';
-// eslint-disable-next-line @typescript-eslint/no-restricted-imports
-import { Heading } from '../heading/heading';
+import { Heading } from 'presentation/atomic-components/atoms/heading/heading';
+import { IconButton } from 'presentation/atomic-components/atoms/icon-button/icon-button';
 import CloseIcon from '@mui/icons-material/Close';
 import type { FC, ReactNode } from 'react';
 import type { OverridableComponent } from '@mui/types';
@@ -69,14 +69,7 @@ export const Modal: FC<ModalProps> = ({ children, openModal, closeModal, ...prop
       >
         {props.title ? (
           <Heading
-            endElement={
-              <span className={'z-10'}>
-                <CloseIcon
-                  className={'cursor-pointer text-error bg-white z-10'}
-                  onClick={closeModal}
-                />
-              </span>
-            }
+            endElement={<IconButton icon={<CloseIcon color={'error'} />} onClick={closeModal} />}
             title={props.title}
           />
         ) : null}

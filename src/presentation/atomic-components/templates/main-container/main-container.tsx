@@ -9,7 +9,7 @@ export const CoreContainer: FC = () => (
       <Sidebar />
       <Grow in>
         <div
-          className={'flex flex-col overflow-auto rounded-xl w-auto h-full bg-white p-8 gap-3 '}
+          className={'flex flex-col overflow-auto rounded-xl w-full h-full bg-white p-8 gap-3 '}
           id={'container'}
         >
           <Outlet />

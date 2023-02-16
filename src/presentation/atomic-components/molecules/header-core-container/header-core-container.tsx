@@ -1,5 +1,6 @@
-import { Breadcrumbs, Link } from '@mui/material';
+import { Breadcrumbs } from '@mui/material';
 import { colors } from 'presentation/styles/palettes';
+import { useNavigate } from 'react-router-dom';
 import { usePath } from 'data/usecases';
 import type { FC } from 'react';
 
@@ -13,12 +14,13 @@ export const HeaderCoreContainer: FC<HeaderCoreContainerProps> = ({
   subTitle,
   hasBreadcrumbs
 }) => {
-  const { allPathname, lastPathname } = usePath();
+  const { allPathname, lastPathname, getLink } = usePath();
+  const navigate = useNavigate();
 
   return (
     <div className={`flex  ${title || subTitle ? 'justify-between' : 'justify-end'}`}>
       {title || subTitle ? (
-        <div className={'flex flex-col border-l-2 border-primary pl-1'}>
+        <div className={'flex flex-col border-l-2 border-primary pl-2'}>
           <h2>{subTitle}</h2>
           <h1 className={'text-primary font-medium uppercase text-[24px]'}>{title}</h1>
         </div>
@@ -26,12 +28,19 @@ export const HeaderCoreContainer: FC<HeaderCoreContainerProps> = ({
       {hasBreadcrumbs ? (
         <div className={'flex items-end'}>
           <Breadcrumbs className={'text-blue'} color={colors.blue}>
-            {allPathname.map((path) => {
-              if (path === lastPathname) return <div>{path}</div>;
+            {allPathname.map((path, index) => {
+              if (path === lastPathname) return <div key={path}>{path}</div>;
               return (
-                <Link key={path} href={`/${path}`}>
+                <button
+                  key={path}
+                  className={'hover:underline'}
+                  onClick={(): void => {
+                    navigate(getLink(allPathname, index));
+                  }}
+                  type={'button'}
+                >
                   {path}
-                </Link>
+                </button>
               );
             })}
           </Breadcrumbs>

@@ -3,7 +3,7 @@
 /* eslint-disable max-lines */
 import { A3 } from 'presentation/atomic-components/atoms/a3/a3';
 import { Button, IconButton, Input, InputAdornment } from '@mui/material';
-import { Heading } from 'presentation/atomic-components/molecules/heading/heading';
+import { Heading } from 'presentation/atomic-components/atoms/heading/heading';
 import { Mandala } from 'presentation/atomic-components/atoms/mandala/mandala';
 import { Modal } from 'presentation/atomic-components/molecules/modal/modal';
 import { Select } from 'presentation/atomic-components/atoms/select/select';

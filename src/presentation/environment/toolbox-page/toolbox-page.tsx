@@ -3,19 +3,18 @@ import { HeaderCoreContainer } from 'presentation/atomic-components/molecules/he
 import { Mandala } from 'presentation/atomic-components/atoms/mandala/mandala';
 import { colors } from 'presentation/styles/palettes';
 import { dataArray } from 'main/mock/mandala';
+import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import type { FC } from 'react';
 
 export const ToolboxPage: FC = () => {
   const [selected, setSelected] = useState<number | null>(null);
+  const navigate = useNavigate();
 
   return (
     <>
-      <HeaderCoreContainer
-        subTitle={'173/2023 - Planejamento estratégico tecnológico'}
-        title={'cadastro a3'}
-      />
+      <HeaderCoreContainer subTitle={'Análise de sistema'} title={'TOOLBOX'} />
       <div className={'flex items-center justify-center transition-transform delay-300'}>
         <Mandala dataArray={dataArray} selected={selected} setSelected={setSelected} />
 
@@ -29,7 +28,13 @@ export const ToolboxPage: FC = () => {
             </div>
             <div className={'flex flex-col w-full justify-center gap-4'}>
               {dataArray[selected].subItem?.map((item) => (
-                <Button key={item.label} className={'w-80'} variant={'secondary'}>
+                <Button
+                  key={item.label}
+                  onClick={(): void => {
+                    navigate(item.link);
+                  }}
+                  variant={'secondary'}
+                >
                   {item.label}
                 </Button>
               ))}

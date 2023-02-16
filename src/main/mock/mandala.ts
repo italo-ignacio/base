@@ -1,13 +1,26 @@
-export const dataArray: { active: boolean; label: string; subItem?: { label: string }[] }[] = [
+import { paths } from 'main/config';
+
+export const dataArray: {
+  active: boolean;
+  label: string;
+  subItem?: { label: string; link: string }[];
+}[] = [
   {
     active: true,
     label: 'Construção cívil',
-    subItem: [{ label: 'Canteiro de obras' }, { label: 'Coordenação' }, { label: 'Projetos' }]
+    subItem: [
+      { label: 'Canteiro de obras', link: paths.AsIsToBe },
+      { label: 'Coordenação', link: paths.AsIsToBe },
+      { label: 'Projetos', link: paths.AsIsToBe }
+    ]
   },
   {
     active: true,
     label: 'TI',
-    subItem: [{ label: 'Infraestrutura' }, { label: 'Sistemas' }]
+    subItem: [
+      { label: 'Infraestrutura', link: paths.AsIsToBe },
+      { label: 'Sistemas', link: paths.AsIsToBe }
+    ]
   },
   { active: true, label: 'Eficiência energética' },
   { active: true, label: 'Processos' },
