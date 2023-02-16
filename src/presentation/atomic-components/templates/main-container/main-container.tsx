@@ -4,7 +4,7 @@ import { Sidebar } from 'presentation/atomic-components/organisms';
 import type { FC } from 'react';
 
 export const CoreContainer: FC = () => (
-  <div className={'w-full h-screen flex bg-bg p-5'}>
+  <div className={'w-full h-screen flex bg-lightGray p-5'}>
     <section className={'w-full flex gap-4'} id={'main'}>
       <Sidebar />
       <Grow in>
