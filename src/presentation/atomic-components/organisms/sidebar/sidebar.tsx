@@ -1,7 +1,10 @@
-import { Box, Divider } from '@mui/material';
+import { Divider } from '@mui/material';
 import { IconButton } from 'presentation/atomic-components/atoms/icon-button/icon-button';
+import { paths } from 'main/config';
 import { useGetIcons } from './sidebar.functions';
+import { useNavigate } from 'react-router-dom';
 import { useRef, useState } from 'react';
+import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import LogoutIcon from '@mui/icons-material/Logout';
 import NotificationsIcon from '@mui/icons-material/Notifications';
 import Slide from '@mui/material/Slide';
@@ -9,7 +12,19 @@ import type { FC } from 'react';
 
 export const Sidebar: FC = () => {
   const [showNotifications, setShowNotifications] = useState(false);
+  const [showAccount, setShowAccount] = useState(false);
   const containerRef = useRef(null);
+  const navigate = useNavigate();
+
+  const change = (type: 'account' | 'notification'): void => {
+    if (type === 'notification') {
+      setShowNotifications(!showNotifications);
+      setShowAccount(false);
+    } else {
+      setShowAccount(!showAccount);
+      setShowNotifications(false);
+    }
+  };
 
   return (
     <>
@@ -22,26 +37,47 @@ export const Sidebar: FC = () => {
         {useGetIcons('admin')}
         <div className={'flex flex-col text-white'}>
           <IconButton
+            icon={<AccountCircleIcon />}
+            onClick={(): void => {
+              change('account');
+            }}
+            selected={showAccount}
+          />
+          <IconButton
             icon={<NotificationsIcon />}
             onClick={(): void => {
-              setShowNotifications(!showNotifications);
+              change('notification');
+            }}
+            selected={showNotifications}
+          />
+          <IconButton
+            icon={<LogoutIcon />}
+            onClick={(): void => {
+              navigate(paths.login);
             }}
           />
-          <IconButton icon={<LogoutIcon />} />
         </div>
       </div>
-      <Box className={'overflow-x-hidden absolute left-11 bg-transparent z-40'} ref={containerRef}>
-        <Slide container={containerRef.current} direction={'right'} in={showNotifications}>
+      <div
+        className={'overflow-x-hidden fixed left-11 bg-transparent w-auto z-40 '}
+        ref={containerRef}
+      >
+        <Slide
+          container={containerRef.current}
+          direction={'right'}
+          in={showNotifications || showAccount}
+        >
           <div
             className={
-              'w-96 h-[calc(100vh-40px)] flex top-5 pl-[40px] py-6 bg-secondary rounded-r-[28px]'
+              'w-auto h-[calc(100vh-40px)] flex top-5 pl-[40px] py-6 bg-secondary rounded-r-[28px]'
             }
           >
             <Divider color={'white'} orientation={'vertical'} />
-            <div>Notificação</div>
+            {showAccount ? <div className={'w-96 text-white'}>Account</div> : null}
+            {showNotifications ? <div className={'w-96 text-white'}>Notification</div> : null}
           </div>
         </Slide>
-      </Box>
+      </div>
     </>
   );
 };

@@ -8,7 +8,10 @@ export const CoreContainer: FC = () => (
     <section className={'w-full flex gap-4'} id={'main'}>
       <Sidebar />
       <Grow in>
-        <div className={'overflow-auto rounded-xl w-full h-full bg-white'} id={'container'}>
+        <div
+          className={'flex flex-col overflow-auto rounded-xl w-auto h-full bg-white p-8 gap-3 '}
+          id={'container'}
+        >
           <Outlet />
         </div>
       </Grow>

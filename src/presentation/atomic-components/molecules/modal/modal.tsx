@@ -1,4 +1,6 @@
 import { Box, Button, Modal as ModalUI } from '@mui/material';
+// eslint-disable-next-line @typescript-eslint/no-restricted-imports
+import { Heading } from '../heading/heading';
 import CloseIcon from '@mui/icons-material/Close';
 import type { FC, ReactNode } from 'react';
 import type { OverridableComponent } from '@mui/types';
@@ -66,17 +68,17 @@ export const Modal: FC<ModalProps> = ({ children, openModal, closeModal, ...prop
         sx={{ width: getWidth(props.size) }}
       >
         {props.title ? (
-          <div className={'flex justify-between'}>
-            <h2 className={'uppercase relative bg-white z-10 pr-1.5'}>{props.title}</h2>
-            <hr className={'mt-3.5 left-auto right-auto absolute w-[calc(100%-70px)]'} />
-
-            <span className={'z-10'}>
-              <CloseIcon
-                className={'cursor-pointer text-error bg-white z-10'}
-                onClick={closeModal}
-              />
-            </span>
-          </div>
+          <Heading
+            endElement={
+              <span className={'z-10'}>
+                <CloseIcon
+                  className={'cursor-pointer text-error bg-white z-10'}
+                  onClick={closeModal}
+                />
+              </span>
+            }
+            title={props.title}
+          />
         ) : null}
 
         {children}

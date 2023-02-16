@@ -1,5 +1,6 @@
 export const paths = {
   home: '/homepage',
   login: '/',
-  proposal: '/proposta'
+  proposal: '/proposal',
+  toolbox: '/proposal/toolbox'
 };

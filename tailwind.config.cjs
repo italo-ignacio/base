@@ -28,7 +28,17 @@ module.exports = {
 
   theme: {
     colors,
-    extend: {},
+    extend: {
+      animation: {
+        big: 'big 0.3s ease-out'
+      },
+      keyframes: {
+        big: {
+          '0%': { width: '5%' },
+          '100%': { width: '30%' }
+        }
+      }
+    },
     variants: {}
   }
 };

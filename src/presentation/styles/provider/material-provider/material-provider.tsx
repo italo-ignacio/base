@@ -240,6 +240,14 @@ export const MaterialUIProvider: FC<Children> = ({ children }: Children) => {
           }
         ]
       },
+      MuiLink: {
+        defaultProps: {
+          style: {
+            color: colors.blue
+          },
+          underline: 'hover'
+        }
+      },
       MuiRadio: {
         defaultProps: {
           checkedIcon: <RadioButtonCheckedTwoToneIcon />,

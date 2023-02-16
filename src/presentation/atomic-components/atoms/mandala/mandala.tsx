@@ -19,10 +19,10 @@ const defaultValues = {
 };
 
 interface MandalaProps {
-  dataArray: { active: boolean; label: string }[];
+  dataArray: { active: boolean; label: string; subItem?: { label: string }[] }[];
   selected: number | null;
   setSelected: Dispatch<SetStateAction<number | null>>;
-  rotation: number;
+  rotation?: number;
   animation?: { easing: 'linear'; duration: number };
 }
 
