@@ -45,7 +45,8 @@ const teste2 = (): string => {
   for (let index = 0; index <= steps.start; index++)
     // eslint-disable-next-line unused-imports/no-unused-vars
     width += Number(document.getElementById(`paper${index}`)?.getBoundingClientRect().width);
-  console.log(width);
+
+  // Console.log(width);
   return `${width}`;
 };
 

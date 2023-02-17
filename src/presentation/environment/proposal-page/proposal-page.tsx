@@ -7,6 +7,8 @@ import {
   TableHead,
   TableRow
 } from '@mui/material';
+import { HeaderCoreContainer } from 'presentation/atomic-components/molecules/header-core-container/header-core-container';
+import { SimpleFilterTable } from 'presentation/atomic-components/molecules/simple-table-filter/simple-table-filter';
 import { useEffect, useState } from 'react';
 import type { FC } from 'react';
 
@@ -166,12 +168,22 @@ export const ProposalPage: FC = () => {
 
   return (
     <div className={'w-auto h-auto overflow-auto'}>
+      <HeaderCoreContainer
+        hasBreadcrumbs={false}
+        subTitle={'JORNADA DE TRANSFORMAÇÃO DIGITAL'}
+        title={'PROPOSTAS'}
+      />
       <TableContainer className={'bg-white'}>
         <Table aria-label={'simple table'} sx={{ minWidth: 650 }}>
           <TableHead className={'font-semibold'}>
             <TableRow>
               <TableCell align={'left'} variant={'head'}>
-                Etapa
+                <div className={'flex gap-3'}>
+                  <span>Etapa</span>
+                  <div className={'w-1 h-1'}>
+                    <SimpleFilterTable filterSide={'right'} />
+                  </div>
+                </div>
               </TableCell>
               <TableCell align={'left'} variant={'head'}>
                 Proposta
@@ -192,7 +204,12 @@ export const ProposalPage: FC = () => {
                 Unid. Relac.
               </TableCell>
               <TableCell align={'left'} variant={'head'}>
-                Unid. Exec.
+                <div className={'flex gap-3 items-center'}>
+                  <span>Unid. Exec.</span>
+                  <div className={'w-1 h-1'}>
+                    <SimpleFilterTable />
+                  </div>
+                </div>
               </TableCell>
             </TableRow>
           </TableHead>

@@ -365,6 +365,7 @@ export const MaterialUIProvider: FC<Children> = ({ children }: Children) => {
             },
             style: {
               color: `${colors.secondary} !important`,
+              fontSize: 'clamp(.8rem, .9vw, 1.5rem) !important',
               fontWeight: 'bold'
             }
           }

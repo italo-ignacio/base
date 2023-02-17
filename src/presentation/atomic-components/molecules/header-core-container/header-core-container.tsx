@@ -20,8 +20,8 @@ export const HeaderCoreContainer: FC<HeaderCoreContainerProps> = ({
   return (
     <div className={`flex  ${title || subTitle ? 'justify-between' : 'justify-end'}`}>
       {title || subTitle ? (
-        <div className={'flex flex-col border-l-2 border-primary pl-2'}>
-          <h2>{subTitle}</h2>
+        <div className={'flex flex-col border-l-4 rounded-sm border-primary pl-2 font-montserrat'}>
+          <h2 className={'font-light'}>{subTitle}</h2>
           <h1 className={'text-primary font-medium uppercase text-[24px]'}>{title}</h1>
         </div>
       ) : null}
