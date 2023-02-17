@@ -29,8 +29,17 @@ module.exports = {
   theme: {
     colors,
     extend: {
+      animation: {
+        big: 'big 0.3s ease-out'
+      },
       fontFamily: {
         montserrat: ['Montserrat']
+      },
+      keyframes: {
+        big: {
+          '0%': { width: '5%' },
+          '100%': { width: '30%' }
+        }
       }
     },
     variants: {}

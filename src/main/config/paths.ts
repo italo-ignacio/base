@@ -1,5 +1,8 @@
 export const paths = {
+  AsIsToBe: '/proposal/enterprises/toolbox/AsIsToBe',
+  enterprises: '/proposal/enterprises',
   home: '/homepage',
   login: '/',
-  proposal: '/proposta'
+  proposal: '/proposal',
+  toolbox: '/proposal/enterprises/toolbox'
 };

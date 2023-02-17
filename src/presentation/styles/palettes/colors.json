@@ -4,7 +4,9 @@
   "white": "#FFFFFF",
   "bg": "#F3F3F3",
   "gray": "#7C848A",
+  "blue": "#1E7BD0",
   "lightGray": "#E5E9EC",
   "error": "#F04100",
+  "red": "#F04100",
   "transparent": "transparent"
 }

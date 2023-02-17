@@ -1,9 +1,8 @@
-// eslint-disable-next-line eslint-comments/disable-enable-pair
-/* eslint-disable no-magic-numbers */
 import { IconButton } from 'presentation/atomic-components/atoms/icon-button/icon-button';
 import { paths } from 'main/config';
 
 import { useNavigate } from 'react-router-dom';
+import { usePath } from 'data/usecases';
 import AssignmentIcon from '@mui/icons-material/Assignment';
 import BusinessCenterIcon from '@mui/icons-material/BusinessCenter';
 import DashboardIcon from '@mui/icons-material/Dashboard';
@@ -46,13 +45,13 @@ const items: itemsProps[] = [
   {
     hideFor: ['empresa'],
     icon: <DashboardIcon />,
-    link: ''
+    link: paths.toolbox
   }
 ];
 
 export const useGetIcons = (user: 'admin' | 'adminLocal' | 'consutor' | 'empresa'): ReactNode => {
-  const pathname = `/${window.location.href.split('/', 4)[3]}`;
   const navigate = useNavigate();
+  const { firstPathname } = usePath();
 
   return (
     <div className={'flex flex-col justify-center items-center text-white'}>
@@ -61,11 +60,12 @@ export const useGetIcons = (user: 'admin' | 'adminLocal' | 'consutor' | 'empresa
           return (
             <IconButton
               key={item.link}
+              disabled={firstPathname === item.link}
               icon={item.icon}
               onClick={(): void => {
                 if (item.link !== '') navigate(item.link);
               }}
-              selected={pathname === item.link}
+              selected={firstPathname === item.link}
             />
           );
 

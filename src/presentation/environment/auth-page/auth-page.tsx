@@ -10,7 +10,7 @@ import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
 import type { FC } from 'react';
 
-export const Auth: FC = () => {
+export const AuthPage: FC = () => {
   const [values, setValues] = useState(false);
   const navigate = useNavigate();
   const handleClickShowPassword = (): void => {
