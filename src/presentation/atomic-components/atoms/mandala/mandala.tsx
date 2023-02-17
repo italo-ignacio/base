@@ -56,7 +56,7 @@ export const Mandala: FC<MandalaProps> = ({
   };
 
   return (
-    <div style={{ height: getSize(), width: getSize() }}>
+    <div id={'mandala'} style={{ height: getSize(), width: getSize() }}>
       <Doughnut
         data={{
           datasets: [

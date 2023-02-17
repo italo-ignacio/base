@@ -61,7 +61,6 @@ export const useGetIcons = (user: 'admin' | 'adminLocal' | 'consutor' | 'empresa
             <IconButton
               key={item.link}
               color={firstPathname === item.link ? 'secondary' : 'primary'}
-              disabled={firstPathname === item.link}
               icon={item.icon}
               onClick={(): void => {
                 if (item.link !== '') navigate(item.link);

@@ -21,7 +21,15 @@ export const ToolboxPage: FC = () => {
         {typeof selected === 'number' && dataArray[selected].subItem ? (
           <div className={'flex gap-4 min-h-[55vh] animate-big w-[30%]'}>
             <div className={'flex justify-start gap-4'}>
-              <Divider className={'w-1'} color={colors.primary} orientation={'vertical'} />
+              <Divider
+                className={'w-1'}
+                color={colors.primary}
+                orientation={'vertical'}
+                sx={{
+                  maxHeight:
+                    document.getElementById('mandala')?.getBoundingClientRect().height || 'auto'
+                }}
+              />
               <span className={'flex p-1 h-min bg-primary rounded-md text-lg mt-2'}>
                 <ArrowForwardIosIcon />
               </span>
