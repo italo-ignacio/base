@@ -32,6 +32,11 @@ module.exports = {
       animation: {
         big: 'big 0.3s ease-out'
       },
+      boxShadow: {
+        double: `inset 0 0 0 4px ${colors.red}, inset 0 0 0 8px ${colors.primary}`,
+        inside: `inset 0 0 0 4px ${colors.red}`,
+        outside: `inset 0 0 0 4px ${colors.primary}`
+      },
       keyframes: {
         big: {
           '0%': { width: '5%' },

@@ -37,6 +37,7 @@ export const Sidebar: FC = () => {
         {useGetIcons('admin')}
         <div className={'flex flex-col text-white'}>
           <IconButton
+            color={showAccount ? 'secondary' : 'primary'}
             icon={<AccountCircleIcon />}
             onClick={(): void => {
               change('account');
@@ -44,6 +45,7 @@ export const Sidebar: FC = () => {
             selected={showAccount}
           />
           <IconButton
+            color={showNotifications ? 'secondary' : 'primary'}
             icon={<NotificationsIcon />}
             onClick={(): void => {
               change('notification');
@@ -51,6 +53,7 @@ export const Sidebar: FC = () => {
             selected={showNotifications}
           />
           <IconButton
+            color={'primary'}
             icon={<LogoutIcon />}
             onClick={(): void => {
               navigate(paths.login);
