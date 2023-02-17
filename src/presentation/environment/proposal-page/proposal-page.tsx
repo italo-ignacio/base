@@ -1,6 +1,25 @@
-import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from '@mui/material';
+import {
+  Chip,
+  Table,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableHead,
+  TableRow
+} from '@mui/material';
+import { HeaderCoreContainer } from 'presentation/atomic-components/molecules/header-core-container/header-core-container';
+import { SimpleFilterTable } from 'presentation/atomic-components/molecules/simple-table-filter/simple-table-filter';
 import { useEffect, useState } from 'react';
 import type { FC } from 'react';
+
+/*
+ * Enum usersRoles {
+ *   admin = 'admin',
+ *   local = 'local',
+ *   consultant = 'consultant',
+ *   company = 'company'
+ * }
+ */
 
 interface unity {
   cfp: number;
@@ -42,7 +61,7 @@ const data: proposal[] = [
     status: {
       conclusionRecord: false,
       diagnostic: true,
-      sgset: true
+      sgset: false
     },
     step: 1,
     techProduct: 'Planejamento Estratégico Tecnológico'
@@ -62,7 +81,7 @@ const data: proposal[] = [
     },
     status: {
       conclusionRecord: false,
-      diagnostic: true,
+      diagnostic: false,
       sgset: true
     },
     step: 1,
@@ -82,6 +101,47 @@ const data: proposal[] = [
       name: 'JANDIRA'
     },
     status: {
+      conclusionRecord: true,
+      sgset: false
+    },
+    step: 1,
+    techProduct: 'Planejamento Estratégico Tecnológico'
+  },
+  {
+    cnpj: '18.587.218/0001-50',
+    executingUnity: {
+      cfp: 121,
+      name: 'Aclimação'
+    },
+    id: 4,
+    name: 'HUFFIX DO BRASIL INDUSTRIA',
+    proposal: '172312-204',
+    relationshipUnity: {
+      cfp: 127,
+      name: 'JANDIRA'
+    },
+    status: {
+      conclusionRecord: false,
+      diagnostic: true,
+      sgset: true
+    },
+    step: 1,
+    techProduct: 'Planejamento Estratégico Tecnológico'
+  },
+  {
+    cnpj: '18.587.218/0001-50',
+    executingUnity: {
+      cfp: 121,
+      name: 'Aclimação'
+    },
+    id: 5,
+    name: 'HUFFIX DO BRASIL INDUSTRIA',
+    proposal: '172312-204',
+    relationshipUnity: {
+      cfp: 127,
+      name: 'JANDIRA'
+    },
+    status: {
       conclusionRecord: false,
       diagnostic: true,
       sgset: true
@@ -91,26 +151,66 @@ const data: proposal[] = [
   }
 ];
 
+// Const role = 'admin';
+
 export const ProposalPage: FC = () => {
   const [proposals, setProposals] = useState<proposal[]>(data);
 
+  // Const [userRole, setUserRole] = useState<string>(role);
+
+  // Const getUserRole = (): string => userRole;
+
   useEffect(() => {
     setProposals(data);
+
+    // SetUserRole(role);
   }, []);
 
   return (
-    <div className={'w-auto h-full drop-shadow-xl bg-primary'}>
+    <div className={'w-auto h-auto overflow-auto'}>
+      <HeaderCoreContainer
+        hasBreadcrumbs={false}
+        subTitle={'JORNADA DE TRANSFORMAÇÃO DIGITAL'}
+        title={'PROPOSTAS'}
+      />
       <TableContainer className={'bg-white'}>
         <Table aria-label={'simple table'} sx={{ minWidth: 650 }}>
-          <TableHead>
-            <TableRow className={'font-bold'}>
-              <TableCell align={'left'}>Etapa</TableCell>
-              <TableCell align={'left'}>Proposta</TableCell>
-              <TableCell align={'left'}>Nome</TableCell>
-              <TableCell align={'left'}>Produto Tecnológico</TableCell>
-              <TableCell align={'left'}>CNPJ</TableCell>
-              <TableCell align={'left'}>Unid. Relac.</TableCell>
-              <TableCell align={'left'}>Unid. Exec.</TableCell>
+          <TableHead className={'font-semibold'}>
+            <TableRow>
+              <TableCell align={'left'} variant={'head'}>
+                <div className={'flex gap-3'}>
+                  <span>Etapa</span>
+                  <div className={'w-1 h-1'}>
+                    <SimpleFilterTable filterSide={'right'} />
+                  </div>
+                </div>
+              </TableCell>
+              <TableCell align={'left'} variant={'head'}>
+                Proposta
+              </TableCell>
+              <TableCell align={'left'} variant={'head'}>
+                Nome
+              </TableCell>
+              <TableCell align={'left'} variant={'head'}>
+                Produto Tecnológico
+              </TableCell>
+              <TableCell align={'left'} variant={'head'}>
+                CNPJ
+              </TableCell>
+              <TableCell align={'left'} variant={'head'}>
+                Status
+              </TableCell>
+              <TableCell align={'left'} variant={'head'}>
+                Unid. Relac.
+              </TableCell>
+              <TableCell align={'left'} variant={'head'}>
+                <div className={'flex gap-3 items-center'}>
+                  <span>Unid. Exec.</span>
+                  <div className={'w-1 h-1'}>
+                    <SimpleFilterTable />
+                  </div>
+                </div>
+              </TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
@@ -127,8 +227,26 @@ export const ProposalPage: FC = () => {
                 <TableCell align={'left'}>{item.name}</TableCell>
                 <TableCell align={'left'}>{item.techProduct}</TableCell>
                 <TableCell align={'left'}>{item.cnpj}</TableCell>
-                <TableCell align={'left'}>{item.relationshipUnity.name}</TableCell>
-                <TableCell align={'left'}>{item.executingUnity.name}</TableCell>
+                <TableCell align={'left'}>
+                  <div className={'flex flex-col gap-2'}>
+                    <Chip
+                      label={'Reg. de conclusão'}
+                      variant={item.status.conclusionRecord === true ? 'filled' : 'outlined'}
+                    />
+                    <Chip
+                      label={'SGSET'}
+                      variant={item.status.sgset === true ? 'filled' : 'outlined'}
+                    />
+                    {item.status.diagnostic ? (
+                      <Chip
+                        label={'Diagnóstico'}
+                        variant={item.status.diagnostic === true ? 'filled' : 'outlined'}
+                      />
+                    ) : null}
+                  </div>
+                </TableCell>
+                <TableCell align={'left'}>{item.relationshipUnity.cfp}</TableCell>
+                <TableCell align={'left'}>{item.executingUnity.cfp}</TableCell>
               </TableRow>
             ))}
           </TableBody>
