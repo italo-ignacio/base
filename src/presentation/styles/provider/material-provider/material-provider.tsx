@@ -102,8 +102,8 @@ export const MaterialUIProvider: FC<Children> = ({ children }: Children) => {
             props: { disabled: true },
             style: {
               background: 'transparent',
-              boxShadow: `inset 0 0 0 2px ${colors.gray}`,
-              color: `${colors.gray} !important`
+              boxShadow: `inset 0 0 0 3px ${colors.lightGray}`,
+              color: `${colors.lightGray} !important`
             }
           }
         ]

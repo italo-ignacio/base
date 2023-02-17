@@ -134,23 +134,28 @@ const defaultValues = {
   zero: 0
 };
 
+interface getItemsProps {
+  end: number[];
+  values: { data: number[]; color: string }[];
+}
 export const AsIsToBePage: FC = () => {
   const [steps, setSteps] = useState<StepsProps[]>(stepsInitial);
 
-  const getItems = (): { data: number[]; color: string }[] => {
+  const getItems = (): getItemsProps => {
     const start = steps.map((step) => step.start);
 
     const end = steps.map((step) => {
-      console.log(step.items.length, step.end);
-
       if (step.items.length === step.start) return step.items.length;
       return step.end || defaultValues.zero;
     });
 
-    return [
-      { color: colors.primary, data: end },
-      { color: colors.red, data: start }
-    ];
+    return {
+      end,
+      values: [
+        { color: colors.primary, data: end },
+        { color: colors.red, data: start }
+      ]
+    };
   };
 
   return (
@@ -162,7 +167,7 @@ export const AsIsToBePage: FC = () => {
       <Heading
         endElement={
           <div className={'w-[200px] min-h-[170px] flex justify-center items-center'}>
-            <Radar values={getItems()} />
+            <Radar values={getItems().values} />
           </div>
         }
         title={'TI - Infra'}
@@ -184,7 +189,7 @@ export const AsIsToBePage: FC = () => {
         <Steps allSteps={steps} setSteps={setSteps} />
 
         <div className={'flex flex-col w-40'}>
-          <Button>Enviar</Button>
+          <Button disabled={getItems().end.includes(defaultValues.zero)}>Enviar</Button>
         </div>
       </div>
     </>

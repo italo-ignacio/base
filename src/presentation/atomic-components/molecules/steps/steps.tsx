@@ -1,5 +1,3 @@
-// eslint-disable-next-line eslint-comments/disable-enable-pair
-/* eslint-disable react/destructuring-assignment */
 import { useWindowDimensions } from 'data/usecases';
 
 import { colors } from 'presentation/styles/palettes';
@@ -77,13 +75,14 @@ export const Steps: FC<StepsProps> = ({ allSteps, setSteps }) => {
   const { width } = useWindowDimensions();
 
   const onClick = (index: number, indexStep: number): void => {
-    // eslint-disable-next-line no-multi-assign, no-param-reassign
-    const teste = allSteps.map((step, indexSt) => ({
-      ...step,
-      end: indexStep === indexSt ? index + defaultValues.first : step.end
-    }));
+    if (allSteps[indexStep].start <= index + defaultValues.first) {
+      const newSteps = allSteps.map((step, indexSt) => ({
+        ...step,
+        end: indexStep === indexSt ? index + defaultValues.first : step.end
+      }));
 
-    setSteps(teste);
+      setSteps(newSteps);
+    }
   };
 
   return (

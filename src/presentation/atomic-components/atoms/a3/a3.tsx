@@ -4,10 +4,11 @@ import type { FC } from 'react';
 
 export const A3: FC = () => (
   <div className={'flex flex-col h-[calc(100vh-40px)] p-3 gap-4'} id={'to_print'}>
-    <div className={'flex items-center gap-4 max-h-[60px] '}>
+    <div className={'flex gap-4 max-h-[60px] justify-between'}>
       <img alt={'logo do senai'} src={SenaiLogo} />
       <h1 className={'text-[22px] font-medium'}>A3 de Desenvolvimento Tecnológico</h1>
       <img alt={'logo da Generic'} src={Generic} />
+      <div className={'w-max'} />
       <div className={'border border-secondary h-full p-1 pt-0.5 w-[20%]'}>Camada de aplicação</div>
       <div className={'border border-secondary h-full p-1 pt-0.5 w-[10%]'}>Data</div>
       <div className={'border border-secondary h-full p-1 pt-0.5 w-[5%]'}>REV</div>

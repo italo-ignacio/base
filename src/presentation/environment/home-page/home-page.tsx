@@ -105,7 +105,8 @@ export const HomePage: FC = () => {
       }
 
       return null;
-    }
+    },
+    pageStyle: '@page { size: landscape; }'
   });
 
   return (
