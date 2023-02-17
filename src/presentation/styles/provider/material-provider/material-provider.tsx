@@ -164,9 +164,9 @@ export const MaterialUIProvider: FC<Children> = ({ children }: Children) => {
             backgroundColor: `${colors.primary}`,
             color: `${colors.secondary}`,
             fontFamily: 'Montserrat',
-            fontSize: '0.875rem',
+            fontSize: '0.7rem',
             fontWeight: 'bold',
-            height: '1.5rem',
+            height: '1.1rem',
             width: 'max-content'
           },
           variant: 'filled'
@@ -346,7 +346,7 @@ export const MaterialUIProvider: FC<Children> = ({ children }: Children) => {
           style: {
             color: `${colors.gray}`,
             fontFamily: 'Montserrat',
-            fontSize: 'clamp(.8rem, .9vw, 1.5rem)'
+            fontSize: 'clamp(.7rem, .8vw, 1.3rem)'
           },
           variant: 'body'
         },

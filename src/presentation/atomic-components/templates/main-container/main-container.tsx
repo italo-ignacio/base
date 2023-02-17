@@ -12,7 +12,7 @@ export const CoreContainer: FC = () => (
           <div className={'flex gap-1'} id={'header-conatiner'}>
             <div className={'bg-primary w-1 h-14 rounded-sm'} />
             <div className={'flex flex-col justify-arou'} id={'texts-container'}>
-              <span className={'text-base font-montserrat text-secondary'}>
+              <span className={'text-base font-light font-montserrat text-secondary'}>
                 JORNADA DE TRANSFORMAÇÃO DIGITAL
               </span>
               <span className={'text-2xl text-primary font-montserrat font-medium'}>PROPOSTAS</span>
