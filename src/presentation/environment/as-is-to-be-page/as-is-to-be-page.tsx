@@ -12,6 +12,7 @@ import type { FC, ReactNode } from 'react';
 
 const stepsInitial = [
   {
+    currentState: 1,
     icon: <CableIcon />,
     items: [
       { title: 'Sem cabeamento' },
@@ -20,10 +21,10 @@ const stepsInitial = [
       { title: 'Cabeamento com documentação' },
       { title: 'Cabeamento estruturado e certificado' }
     ],
-    start: 1,
     title: 'Cabeamento'
   },
   {
+    currentState: 3,
     icon: <WifiOutlinedIcon />,
     items: [
       { title: 'Sem wi-fi' },
@@ -32,22 +33,22 @@ const stepsInitial = [
       { title: 'Wi-fi corporativo centralizado' },
       { title: 'Wi-fi corporativo centralizado e seguro' }
     ],
-    start: 3,
     title: 'Wi-fi'
   },
   {
+    currentState: 5,
     icon: <WifiOutlinedIcon />,
     items: [
       { title: 'Não utiliza' },
       { title: 'Utiliza redes publicas com cobertura parcial' },
       { title: 'Utiliza redes publicas com cobertura total' },
       { title: 'Utiliza dados moveis privados' },
-      { title: 'Conectividade nos dois sentidos, end-point ⬌ servidor' }
+      { title: 'Conectividade nos dois sentidos, futureState-point ⬌ servidor' }
     ],
-    start: 5,
     title: 'Redes Móveis'
   },
   {
+    currentState: 1,
     icon: <CableIcon />,
     items: [
       { title: 'Sem cabeamento' },
@@ -56,10 +57,10 @@ const stepsInitial = [
       { title: 'Cabeamento com documentação' },
       { title: 'Cabeamento estruturado e certificado' }
     ],
-    start: 1,
     title: 'Cabeamento'
   },
   {
+    currentState: 3,
     icon: <WifiOutlinedIcon />,
     items: [
       { title: 'Sem wi-fi' },
@@ -68,22 +69,22 @@ const stepsInitial = [
       { title: 'Wi-fi corporativo centralizado' },
       { title: 'Wi-fi corporativo centralizado e seguro' }
     ],
-    start: 3,
     title: 'Wi-fi'
   },
   {
+    currentState: 5,
     icon: <WifiOutlinedIcon />,
     items: [
       { title: 'Não utiliza' },
       { title: 'Utiliza redes publicas com cobertura parcial' },
       { title: 'Utiliza redes publicas com cobertura total' },
       { title: 'Utiliza dados moveis privados' },
-      { title: 'Conectividade nos dois sentidos, end-point ⬌ servidor' }
+      { title: 'Conectividade nos dois sentidos, futureState-point ⬌ servidor' }
     ],
-    start: 5,
     title: 'Redes Móveis'
   },
   {
+    currentState: 1,
     icon: <CableIcon />,
     items: [
       { title: 'Sem cabeamento' },
@@ -92,10 +93,10 @@ const stepsInitial = [
       { title: 'Cabeamento com documentação' },
       { title: 'Cabeamento estruturado e certificado' }
     ],
-    start: 1,
     title: 'Cabeamento'
   },
   {
+    currentState: 3,
     icon: <WifiOutlinedIcon />,
     items: [
       { title: 'Sem wi-fi' },
@@ -104,30 +105,29 @@ const stepsInitial = [
       { title: 'Wi-fi corporativo centralizado' },
       { title: 'Wi-fi corporativo centralizado e seguro' }
     ],
-    start: 3,
     title: 'Wi-fi'
   },
   {
+    currentState: 5,
     icon: <WifiOutlinedIcon />,
     items: [
       { title: 'Não utiliza' },
       { title: 'Utiliza redes publicas com cobertura parcial' },
       { title: 'Utiliza redes publicas com cobertura total' },
       { title: 'Utiliza dados moveis privados' },
-      { title: 'Conectividade nos dois sentidos, end-point ⬌ servidor' }
+      { title: 'Conectividade nos dois sentidos, futureState-point ⬌ servidor' }
     ],
-    start: 5,
     title: 'Redes Móveis'
   }
 ];
 
-interface StepsProps {
+export interface StepsItemsProps {
   icon: ReactNode;
   items: {
     title: string;
   }[];
-  start: number;
-  end?: number;
+  currentState: number;
+  futureState?: number;
   title: string;
 }
 const defaultValues = {
@@ -135,25 +135,25 @@ const defaultValues = {
 };
 
 interface getItemsProps {
-  end: number[];
+  futureState: number[];
   values: { data: number[]; color: string }[];
 }
 export const AsIsToBePage: FC = () => {
-  const [steps, setSteps] = useState<StepsProps[]>(stepsInitial);
+  const [steps, setSteps] = useState<StepsItemsProps[]>(stepsInitial);
 
   const getItems = (): getItemsProps => {
-    const start = steps.map((step) => step.start);
+    const currentState = steps.map((step) => step.currentState);
 
-    const end = steps.map((step) => {
-      if (step.items.length === step.start) return step.items.length;
-      return step.end || defaultValues.zero;
+    const futureState = steps.map((step) => {
+      if (step.items.length === step.currentState) return step.items.length;
+      return step.futureState || defaultValues.zero;
     });
 
     return {
-      end,
+      futureState,
       values: [
-        { color: colors.primary, data: end },
-        { color: colors.red, data: start }
+        { color: colors.primary, data: futureState },
+        { color: colors.red, data: currentState }
       ]
     };
   };
@@ -189,7 +189,7 @@ export const AsIsToBePage: FC = () => {
         <Steps allSteps={steps} setSteps={setSteps} />
 
         <div className={'flex flex-col w-40'}>
-          <Button disabled={getItems().end.includes(defaultValues.zero)}>Enviar</Button>
+          <Button disabled={getItems().futureState.includes(defaultValues.zero)}>Enviar</Button>
         </div>
       </div>
     </>

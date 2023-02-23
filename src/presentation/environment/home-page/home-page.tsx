@@ -113,7 +113,7 @@ export const HomePage: FC = () => {
     <>
       <Heading title={'home'} />
       <div className={'flex flex-col pt-2'}>
-        <div className={'flex justify-start'}>
+        <div className={'flex justify-end'}>
           <Button onClick={handlePrint}>
             <LocalPrintshopIcon />
           </Button>
