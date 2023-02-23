@@ -60,7 +60,7 @@ export const useGetIcons = (user: 'admin' | 'adminLocal' | 'consutor' | 'empresa
           return (
             <IconButton
               key={item.link}
-              disabled={firstPathname === item.link}
+              color={firstPathname === item.link ? 'secondary' : 'primary'}
               icon={item.icon}
               onClick={(): void => {
                 if (item.link !== '') navigate(item.link);

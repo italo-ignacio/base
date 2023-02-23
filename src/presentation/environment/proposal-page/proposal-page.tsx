@@ -207,7 +207,7 @@ export const ProposalPage: FC = () => {
                 <div className={'flex gap-3 items-center'}>
                   <span>Unid. Exec.</span>
                   <div className={'w-1 h-1'}>
-                    <SimpleFilterTable />
+                    <SimpleFilterTable filterSide={'left'} />
                   </div>
                 </div>
               </TableCell>
@@ -231,15 +231,18 @@ export const ProposalPage: FC = () => {
                   <div className={'flex flex-col gap-2'}>
                     <Chip
                       label={'Reg. de conclusão'}
+                      size={'small'}
                       variant={item.status.conclusionRecord === true ? 'filled' : 'outlined'}
                     />
                     <Chip
                       label={'SGSET'}
+                      size={'small'}
                       variant={item.status.sgset === true ? 'filled' : 'outlined'}
                     />
                     {item.status.diagnostic ? (
                       <Chip
                         label={'Diagnóstico'}
+                        size={'small'}
                         variant={item.status.diagnostic === true ? 'filled' : 'outlined'}
                       />
                     ) : null}

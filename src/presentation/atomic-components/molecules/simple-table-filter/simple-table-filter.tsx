@@ -5,7 +5,11 @@ import type { FC } from 'react';
 
 type Side = 'left' | 'right';
 
-export const SimpleFilterTable: FC = ({ filterSide }: { filterSide: Side }) => {
+export const SimpleFilterTable: FC<{ filterSide: Side }> = ({
+  filterSide
+}: {
+  filterSide: Side;
+}) => {
   const [isOpen, setIsOpen] = useState(false);
 
   return (

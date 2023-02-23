@@ -26,7 +26,7 @@ export const HeaderCoreContainer: FC<HeaderCoreContainerProps> = ({
         </div>
       ) : null}
       {hasBreadcrumbs ? (
-        <div className={'flex items-end'}>
+        <div className={'flex items-center'}>
           <Breadcrumbs className={'text-blue'} color={colors.blue}>
             {allPathname.map((path, index) => {
               if (path === lastPathname) return <div key={path}>{path}</div>;

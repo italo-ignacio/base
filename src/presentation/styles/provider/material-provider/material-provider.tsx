@@ -102,8 +102,8 @@ export const MaterialUIProvider: FC<Children> = ({ children }: Children) => {
             props: { disabled: true },
             style: {
               background: 'transparent',
-              boxShadow: `inset 0 0 0 2px ${colors.gray}`,
-              color: `${colors.gray} !important`
+              boxShadow: `inset 0 0 0 3px ${colors.lightGray}`,
+              color: `${colors.lightGray} !important`
             }
           }
         ]
@@ -166,7 +166,6 @@ export const MaterialUIProvider: FC<Children> = ({ children }: Children) => {
             fontFamily: 'Montserrat',
             fontSize: '0.7rem',
             fontWeight: 'bold',
-            height: '1.1rem',
             width: 'max-content'
           },
           variant: 'filled'
@@ -179,6 +178,14 @@ export const MaterialUIProvider: FC<Children> = ({ children }: Children) => {
             style: {
               backgroundColor: `${colors.white} !important`,
               border: `1px solid ${colors.secondary} `
+            }
+          },
+          {
+            props: {
+              size: 'small'
+            },
+            style: {
+              height: '1.1rem'
             }
           }
         ]
@@ -312,7 +319,7 @@ export const MaterialUIProvider: FC<Children> = ({ children }: Children) => {
             style: {
               svg: {
                 circle: {
-                  r: 6
+                  r: 7
                 },
                 path: {
                   color: colors.secondary

@@ -4,8 +4,6 @@ import { colors } from 'presentation/styles/palettes';
 import ChartDataLabels from 'chartjs-plugin-datalabels';
 import type { Dispatch, FC, SetStateAction } from 'react';
 
-ChartJS.register(ArcElement, ChartDataLabels);
-
 const defaultValues = {
   circumference: 360,
   fontSize: 16,
@@ -33,6 +31,7 @@ export const Mandala: FC<MandalaProps> = ({
   rotation,
   animation
 }) => {
+  ChartJS.register(ArcElement, ChartDataLabels);
   const getData = (): number[] => {
     const dataValues = defaultValues.circumference / dataArray.length;
 
@@ -57,7 +56,7 @@ export const Mandala: FC<MandalaProps> = ({
   };
 
   return (
-    <div style={{ height: getSize(), width: getSize() }}>
+    <div id={'mandala'} style={{ height: getSize(), width: getSize() }}>
       <Doughnut
         data={{
           datasets: [

@@ -105,14 +105,15 @@ export const HomePage: FC = () => {
       }
 
       return null;
-    }
+    },
+    pageStyle: '@page { size: landscape; }'
   });
 
   return (
     <>
       <Heading title={'home'} />
       <div className={'flex flex-col pt-2'}>
-        <div className={'flex justify-start'}>
+        <div className={'flex justify-end'}>
           <Button onClick={handlePrint}>
             <LocalPrintshopIcon />
           </Button>
