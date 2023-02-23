@@ -167,7 +167,7 @@ export const ProposalPage: FC = () => {
   }, []);
 
   return (
-    <div className={'w-auto h-auto overflow-auto'}>
+    <div className={'w-auto h-auto'}>
       <HeaderCoreContainer
         hasBreadcrumbs={false}
         subTitle={'JORNADA DE TRANSFORMAÇÃO DIGITAL'}
@@ -177,49 +177,59 @@ export const ProposalPage: FC = () => {
         <Table aria-label={'simple table'} sx={{ minWidth: 650 }}>
           <TableHead className={'font-semibold'}>
             <TableRow>
-              <TableCell align={'left'} variant={'head'}>
-                <div className={'flex gap-3'}>
+              <TableCell align={'justify'} variant={'head'}>
+                <div className={'flex justify-between'}>
                   <span>Etapa</span>
-                  <div className={'w-1 h-1'}>
-                    <SimpleFilterTable filterSide={'right'} />
-                  </div>
+                  <SimpleFilterTable filterSide={'right'} title={'Etapa'} />
                 </div>
               </TableCell>
               <TableCell align={'left'} variant={'head'}>
-                Proposta
+                <div className={'flex justify-between'}>
+                  <span>Propostas</span>
+                  <SimpleFilterTable filterSide={'right'} title={'Propostas'} />
+                </div>
               </TableCell>
               <TableCell align={'left'} variant={'head'}>
-                Nome
+                <div className={'flex justify-between'}>
+                  <span>Nome</span>
+                  <SimpleFilterTable filterSide={'right'} title={'Nome'} />
+                </div>
               </TableCell>
               <TableCell align={'left'} variant={'head'}>
-                Produto Tecnológico
+                <div className={'flex justify-between'}>
+                  <span>Produto Tecnológico</span>
+                  <SimpleFilterTable filterSide={'right'} title={'Produto Tecnológico'} />
+                </div>
               </TableCell>
               <TableCell align={'left'} variant={'head'}>
-                CNPJ
+                <div className={'flex justify-between'}>
+                  <span>CNPJ</span>
+                  <SimpleFilterTable filterSide={'right'} title={'CNPJ'} />
+                </div>
               </TableCell>
               <TableCell align={'left'} variant={'head'}>
-                Status
+                <div className={'flex justify-between w-full h-full'}>
+                  <span>Status</span>
+                  <SimpleFilterTable filterSide={'left'} title={'Status'} />
+                </div>
               </TableCell>
               <TableCell align={'left'} variant={'head'}>
-                Unid. Relac.
+                <div className={'flex justify-between items-center'}>
+                  <span>Unid. Relac.</span>
+                  <SimpleFilterTable filterSide={'left'} title={'Unid. Relac.'} />
+                </div>
               </TableCell>
               <TableCell align={'left'} variant={'head'}>
-                <div className={'flex gap-3 items-center'}>
+                <div className={'flex justify-between items-center'}>
                   <span>Unid. Exec.</span>
-                  <div className={'w-1 h-1'}>
-                    <SimpleFilterTable filterSide={'left'} />
-                  </div>
+                  <SimpleFilterTable filterSide={'left'} title={'Unid. Exec.'} />
                 </div>
               </TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
             {proposals.map((item) => (
-              <TableRow
-                key={item.id}
-                className={'uppercase'}
-                sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
-              >
+              <TableRow key={item.id} className={'uppercase'}>
                 <TableCell align={'left'} component={'th'} scope={'row'}>
                   {item.step}
                 </TableCell>

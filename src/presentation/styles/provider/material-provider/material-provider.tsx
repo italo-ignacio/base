@@ -192,7 +192,11 @@ export const MaterialUIProvider: FC<Children> = ({ children }: Children) => {
       },
       MuiInput: {
         defaultProps: {
-          color: 'primary'
+          color: 'primary',
+          style: {
+            fontFamily: 'Montserrat',
+            fontSize: 'clamp(.7rem, .8vw, 1.3rem)'
+          }
         },
         variants: [
           {
