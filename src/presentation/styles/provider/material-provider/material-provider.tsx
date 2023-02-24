@@ -155,6 +155,20 @@ export const MaterialUIProvider: FC<Children> = ({ children }: Children) => {
                 }
               }
             }
+          },
+          {
+            props: { color: 'secondary' },
+            style: {
+              svg: {
+                'path:first-child': {
+                  color: colors.primary,
+                  opacity: 1
+                },
+                'path:last-child': {
+                  color: colors.white
+                }
+              }
+            }
           }
         ]
       },
@@ -368,7 +382,8 @@ export const MaterialUIProvider: FC<Children> = ({ children }: Children) => {
           style: {
             color: `${colors.gray}`,
             fontFamily: 'Montserrat',
-            fontSize: 'clamp(.7rem, .8vw, 1.3rem)'
+            fontSize: 'clamp(.7rem, .8vw, 1.3rem)',
+            overflowWrap: 'anywhere'
           },
           variant: 'body'
         },
@@ -380,7 +395,8 @@ export const MaterialUIProvider: FC<Children> = ({ children }: Children) => {
             style: {
               color: `${colors.secondary} !important`,
               fontSize: 'clamp(.8rem, .9vw, 1.5rem) !important',
-              fontWeight: 'bold'
+              fontWeight: 'bold',
+              overflowWrap: 'revert-layer !important'
             }
           }
         ]
