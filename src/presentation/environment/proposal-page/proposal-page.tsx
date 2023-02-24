@@ -1,3 +1,5 @@
+// eslint-disable-next-line eslint-comments/disable-enable-pair
+/* eslint-disable max-lines */
 import {
   Chip,
   Table,
@@ -11,6 +13,7 @@ import { HeaderCoreContainer } from 'presentation/atomic-components/molecules/he
 import { SimpleFilterTable } from 'presentation/atomic-components/molecules/simple-table-filter/simple-table-filter';
 import { useEffect, useState } from 'react';
 import type { FC } from 'react';
+import type { Filter } from 'presentation/atomic-components/molecules/simple-table-filter/simple-table-filter';
 
 /*
  * Enum usersRoles {
@@ -52,7 +55,7 @@ const data: proposal[] = [
       name: 'Aclimação'
     },
     id: 1,
-    name: 'HUFFIX DO BRASIL INDUSTRIA',
+    name: 'HUFFIX DO aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa BRASIL INDUSTRIA',
     proposal: '172312-204',
     relationshipUnity: {
       cfp: 127,
@@ -150,6 +153,13 @@ const data: proposal[] = [
     techProduct: 'Planejamento Estratégico Tecnológico'
   }
 ];
+const filterOptions: Filter[] = [
+  { label: 'Lorena Ipsula 1', value: 1 },
+  { label: 'Lorena Ipsula 2', value: 2 },
+  { label: 'Lorena Ipsula 3', value: 3 },
+  { label: 'Lorena Ipsula 4', value: 4 },
+  { label: 'Lorena Ipsula 5', value: 5 }
+];
 
 // Const role = 'admin';
 
@@ -180,49 +190,81 @@ export const ProposalPage: FC = () => {
               <TableCell align={'justify'} variant={'head'}>
                 <div className={'flex justify-between'}>
                   <span>Etapa</span>
-                  <SimpleFilterTable filterSide={'right'} title={'Etapa'} />
+                  <SimpleFilterTable
+                    filterOptions={filterOptions}
+                    filterSide={'right'}
+                    title={'Etapa'}
+                  />
                 </div>
               </TableCell>
               <TableCell align={'left'} variant={'head'}>
                 <div className={'flex justify-between'}>
                   <span>Propostas</span>
-                  <SimpleFilterTable filterSide={'right'} title={'Propostas'} />
+                  <SimpleFilterTable
+                    filterOptions={filterOptions}
+                    filterSide={'right'}
+                    title={'Propostas'}
+                  />
                 </div>
               </TableCell>
               <TableCell align={'left'} variant={'head'}>
                 <div className={'flex justify-between'}>
                   <span>Nome</span>
-                  <SimpleFilterTable filterSide={'right'} title={'Nome'} />
+                  <SimpleFilterTable
+                    filterOptions={filterOptions}
+                    filterSide={'right'}
+                    title={'Nome'}
+                  />
                 </div>
               </TableCell>
               <TableCell align={'left'} variant={'head'}>
                 <div className={'flex justify-between'}>
                   <span>Produto Tecnológico</span>
-                  <SimpleFilterTable filterSide={'right'} title={'Produto Tecnológico'} />
+                  <SimpleFilterTable
+                    filterOptions={filterOptions}
+                    filterSide={'right'}
+                    title={'Produto Tecnológico'}
+                  />
                 </div>
               </TableCell>
               <TableCell align={'left'} variant={'head'}>
                 <div className={'flex justify-between'}>
                   <span>CNPJ</span>
-                  <SimpleFilterTable filterSide={'right'} title={'CNPJ'} />
+                  <SimpleFilterTable
+                    filterOptions={filterOptions}
+                    filterSide={'right'}
+                    title={'CNPJ'}
+                  />
                 </div>
               </TableCell>
               <TableCell align={'left'} variant={'head'}>
                 <div className={'flex justify-between w-full h-full'}>
                   <span>Status</span>
-                  <SimpleFilterTable filterSide={'left'} title={'Status'} />
+                  <SimpleFilterTable
+                    filterOptions={filterOptions}
+                    filterSide={'left'}
+                    title={'Status'}
+                  />
                 </div>
               </TableCell>
               <TableCell align={'left'} variant={'head'}>
                 <div className={'flex justify-between items-center'}>
                   <span>Unid. Relac.</span>
-                  <SimpleFilterTable filterSide={'left'} title={'Unid. Relac.'} />
+                  <SimpleFilterTable
+                    filterOptions={filterOptions}
+                    filterSide={'left'}
+                    title={'Unid. Relac.'}
+                  />
                 </div>
               </TableCell>
               <TableCell align={'left'} variant={'head'}>
                 <div className={'flex justify-between items-center'}>
                   <span>Unid. Exec.</span>
-                  <SimpleFilterTable filterSide={'left'} title={'Unid. Exec.'} />
+                  <SimpleFilterTable
+                    filterOptions={filterOptions}
+                    filterSide={'left'}
+                    title={'Unid. Exec.'}
+                  />
                 </div>
               </TableCell>
             </TableRow>
