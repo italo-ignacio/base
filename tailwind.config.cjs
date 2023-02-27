@@ -19,6 +19,10 @@ module.exports = {
         '*::-webkit-scrollbar-track-piece': {
           backgroundColor: '#E5E9EC',
           borderRadius: '10px',
+          marginBottom: '0.5rem',
+          marginTop: '0.5rem'
+        },
+        '.main::-webkit-scrollbar-track-piece': {
           marginBottom: '1rem',
           marginTop: '5rem'
         }

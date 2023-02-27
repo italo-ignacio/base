@@ -6,17 +6,21 @@ import { Button, IconButton, Input, InputAdornment } from '@mui/material';
 import { Heading } from 'presentation/atomic-components/atoms/heading/heading';
 import { Mandala } from 'presentation/atomic-components/atoms/mandala/mandala';
 import { Modal } from 'presentation/atomic-components/molecules/modal/modal';
+import { Pagination } from 'presentation/atomic-components/molecules/pagination/pagination';
 import { Select } from 'presentation/atomic-components/atoms/select/select';
 import { Textarea } from 'presentation/atomic-components/atoms/textarea/textarea';
 import { dataArray } from 'main/mock/mandala';
 import { options } from 'main/utils/items';
+import { useGetAllUsersQuery } from 'infra/cache/queries';
 import { useModal } from 'data/usecases/use-modal';
+import { usePagination, useSearch } from 'data/usecases';
 import { useReactToPrint } from 'react-to-print';
 import { useRef, useState } from 'react';
 import Checkbox from '@mui/material/Checkbox';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import LocalPrintshopIcon from '@mui/icons-material/LocalPrintshop';
+import QueryManager from 'presentation/atomic-components/molecules/query-manager/query-manager';
 import Radio from '@mui/material/Radio';
 import RadioGroup from '@mui/material/RadioGroup';
 import Switch from '@mui/material/Switch';
@@ -26,6 +30,8 @@ import type { FC, LegacyRef, RefObject } from 'react';
 // eslint-disable-next-line max-lines-per-function
 export const HomePage: FC = () => {
   const [values, setValues] = useState(false);
+  const [search, setSearch] = useState('');
+
   const componentRef = useRef() as LegacyRef<HTMLDivElement>;
   const [liberada, setLiberada] = useState(true);
   const [selected, setSelected] = useState<number | null>(null);
@@ -39,6 +45,10 @@ export const HomePage: FC = () => {
   const liberar = (): void => {
     setLiberada(false);
   };
+  const { page, setPage, handleChangePage } = usePagination();
+  const { data: userData } = useSearch({ page, search, setPage });
+
+  const query = useGetAllUsersQuery(userData);
 
   const {
     closeModal: closeFirstModal,
@@ -143,7 +153,6 @@ export const HomePage: FC = () => {
             <Button onClick={spin}>Rodar</Button>
           </div>
         </div>
-
         <div className={'flex flex-col p-6 gap-2 justify-center md:flex-row'}>
           <div className={'flex flex-col gap-2'}>
             <Button endIcon={<Visibility />} startIcon={<Visibility />}>
@@ -195,6 +204,7 @@ export const HomePage: FC = () => {
                 endIcon={<Visibility />}
                 onClick={(): void => {
                   closeSecondModal();
+
                   liberar();
                 }}
                 variant={'secondary'}
@@ -328,8 +338,20 @@ export const HomePage: FC = () => {
 
         <div className={'flex flex-col p-6 gap-2 justify-center md:flex-row'}>
           <div className={'flex flex-col gap-2'}>
-            <Textarea />
+            <Textarea onChange={(e): void => setSearch(e.target.value)} value={search} />
           </div>
+        </div>
+        <div className={'flex flex-col justify-center items-center gap-4'}>
+          <QueryManager query={query} skeleton={<>Carregando...</>}>
+            {query.isSuccess ? (
+              <div className={''}>
+                {query.data.map((item) => (
+                  <div key={item.id}>{item.name}</div>
+                ))}
+              </div>
+            ) : null}
+          </QueryManager>
+          <Pagination handleChangePage={handleChangePage} page={page} totalPages={6} />
         </div>
 
         <div className={'flex flex-col p-6 gap-2 justify-center md:flex-row'}>

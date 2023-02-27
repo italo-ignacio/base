@@ -217,8 +217,11 @@ export const MaterialUIProvider: FC<Children> = ({ children }: Children) => {
             props: { color: 'primary' },
             style: {
               ':focus-within': {
+                ':after': {
+                  borderBottom: `2px solid ${colors.primary} !important`
+                },
                 ':before': {
-                  borderBottom: `1px solid ${colors.primary}`
+                  borderBottom: `2px solid ${colors.primary} !important`
                 },
                 svg: {
                   color: `${colors.primary} !important`

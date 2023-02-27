@@ -5,14 +5,15 @@ import { useDebounce } from './use-debounce';
 
 interface useSearchProps {
   page: number;
-  search: string | null;
+  search: string;
   setPage: Dispatch<SetStateAction<number>>;
 }
 
 interface useSearchResponse {
   page: number;
-  search: string | null;
+  search: string;
 }
+
 const firstPage = 1;
 const delay = 500;
 
