@@ -25,6 +25,13 @@ module.exports = {
         '.main::-webkit-scrollbar-track-piece': {
           marginBottom: '1rem',
           marginTop: '5rem'
+        },
+        '.filter::-webkit-scrollbar-track-piece': {
+          backgroundColor: '#343A40'
+        },
+        '.filter::-webkit-scrollbar-thumb': {
+          backgroundColor: '#F3F3F3',
+          borderRadius: '10px'
         }
       });
     })
