@@ -1,4 +1,4 @@
-type routes = 'users';
+type routes = '/users';
 
 interface ApiProps {
   route: routes;
@@ -14,7 +14,7 @@ interface ApiProps {
 
 const apiFunction = async <T>(params: ApiProps): Promise<T> => {
   const api = await fetch(
-    `https://63f75efd833c7c9c60828761.mockapi.io/api/v1/${params.route}${
+    `https://63f75efd833c7c9c60828761.mockapi.io/api/v1${params.route}${
       params.id ? `/${params.id}` : ''
     }${
       params.queryParams ? `?${new URLSearchParams(params.queryParams as { search: string })}` : ''

@@ -19,6 +19,6 @@ export const useGetAllUsersQuery = ({
   useQuery([['users', page, searchUser]], () =>
     api.get({
       queryParams: { limit: 10, page, search: searchUser },
-      route: 'users'
+      route: '/users'
     })
   );
