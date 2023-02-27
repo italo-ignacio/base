@@ -35,7 +35,7 @@ const items: itemsProps[] = [
   {
     hideFor: ['adminLocal', 'consutor', 'empresa'],
     icon: <AssignmentIcon />,
-    link: ''
+    link: paths.forms
   },
   {
     hideFor: ['adminLocal', 'consutor', 'empresa'],

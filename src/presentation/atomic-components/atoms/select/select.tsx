@@ -1,18 +1,35 @@
 import { Autocomplete, Chip, TextField } from '@mui/material';
 import CloseIcon from '@mui/icons-material/Close';
-import type { FC, ReactNode } from 'react';
+import type { FC, ReactNode, RefCallback } from 'react';
 import type { TextFieldProps } from '@mui/material';
+
+interface Values {
+  label: string;
+  value: string;
+}
 
 type SelectProps = TextFieldProps & {
   isMultiple?: boolean;
-  options: readonly unknown[];
+  options: Values[];
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  field: any;
+  change: (value: string) => void;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  reference: RefCallback<any>;
 };
 
 interface OptionProps {
   label: string;
 }
 
-export const Select: FC<SelectProps> = ({ isMultiple, options, ...props }) => (
+export const Select: FC<SelectProps> = ({
+  isMultiple,
+  options,
+  field,
+  change,
+  reference,
+  ...props
+}) => (
   <Autocomplete
     clearOnEscape
     clearText={'Limpar'}
@@ -24,6 +41,12 @@ export const Select: FC<SelectProps> = ({ isMultiple, options, ...props }) => (
     loadingText={'Carregando...'}
     multiple={isMultiple}
     noOptionsText={'Nenhum dado encontrado'}
+    onChange={(e, data): void => {
+      const Data = data as Values;
+
+      if (Data?.value) change(Data.value);
+      else change('');
+    }}
     openText={'Abrir'}
     options={options}
     renderInput={({ InputProps, ...params }): ReactNode => {
@@ -31,7 +54,13 @@ export const Select: FC<SelectProps> = ({ isMultiple, options, ...props }) => (
 
       return (
         <>
-          <TextField InputProps={{ ...rest }} {...params} {...props} />
+          <TextField
+            InputProps={{ ...rest }}
+            {...params}
+            {...props}
+            {...field}
+            inputRef={reference}
+          />
           <TextField InputProps={{ startAdornment }} color={'isSelect'} />
         </>
       );

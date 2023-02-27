@@ -5,8 +5,3 @@ export interface Unity {
   createdAt: string;
   updatedAt: string;
 }
-
-export interface CreateUnityRequest {
-  name: string;
-  code: number;
-}
