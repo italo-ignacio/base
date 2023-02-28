@@ -18,24 +18,29 @@ import type { FC, ReactElement } from 'react';
 type Side = 'left' | 'right';
 
 type Order = 'asc' | 'desc' | 'none';
-export interface Filter {
+export interface FilterOption {
   label: string;
   value: number;
 }
 interface SimpleFilterTableProps {
   filterSide: Side;
   title: string;
-  filterOptions?: Filter[];
+  filterOptions?: FilterOption[];
+  isOpen: boolean;
+  onClick: () => void;
+  onClose: () => void;
 }
 
 // eslint-disable-next-line max-lines-per-function
 export const SimpleFilterTable: FC<SimpleFilterTableProps> = ({
   filterSide,
   title,
-  filterOptions
+  filterOptions,
+  isOpen,
+  onClick,
+  onClose
 }) => {
-  const [isOpen, setIsOpen] = useState(false);
-  const [selectedFilters, setSelectedFilters] = useState<Filter[]>();
+  const [selectedFilters, setSelectedFilters] = useState<FilterOption[]>();
   const [selectedOrder, setSelectedOrder] = useState<Order>('none');
   const minimum = -1;
 
@@ -43,14 +48,14 @@ export const SimpleFilterTable: FC<SimpleFilterTableProps> = ({
     setSelectedFilters([]);
   };
 
-  const findSelectedFilter = (filter: Filter): number => {
+  const findSelectedFilter = (filter: FilterOption): number => {
     if (selectedFilters)
       return selectedFilters.findIndex((selectedFilter) => selectedFilter === filter);
 
     return minimum;
   };
 
-  const checkOptionIsSelected = (filter: Filter): boolean => {
+  const checkOptionIsSelected = (filter: FilterOption): boolean => {
     if (selectedFilters) {
       const index = findSelectedFilter(filter);
 
@@ -60,12 +65,12 @@ export const SimpleFilterTable: FC<SimpleFilterTableProps> = ({
     return false;
   };
 
-  const selectFilter = (filter: Filter): void => {
+  const selectFilter = (filter: FilterOption): void => {
     if (selectedFilters) setSelectedFilters([...selectedFilters, filter]);
     else setSelectedFilters([filter]);
   };
 
-  const deselectFilters = (filter: Filter): void => {
+  const deselectFilters = (filter: FilterOption): void => {
     if (selectedFilters) {
       const selectedFilterIndex = findSelectedFilter(filter);
 
@@ -77,7 +82,7 @@ export const SimpleFilterTable: FC<SimpleFilterTableProps> = ({
     }
   };
 
-  const handleFilterOptionClick = (filter: Filter): void => {
+  const handleFilterOptionClick = (filter: FilterOption): void => {
     if (checkOptionIsSelected(filter)) deselectFilters(filter);
     else selectFilter(filter);
   };
@@ -85,18 +90,24 @@ export const SimpleFilterTable: FC<SimpleFilterTableProps> = ({
   const handleOrder = (): ReactElement => {
     if (selectedOrder === 'none')
       return (
-        <SwapVertIcon className={'text-white'} onClick={(): void => setSelectedOrder('asc')} />
+        <SwapVertIcon
+          className={'text-white hover:cursor-pointer'}
+          onClick={(): void => setSelectedOrder('asc')}
+        />
       );
     if (selectedOrder === 'asc')
       return (
         <ArrowDownwardIcon
-          className={'text-white'}
+          className={'text-white hover:cursor-pointer'}
           onClick={(): void => setSelectedOrder('desc')}
         />
       );
 
     return (
-      <ArrowUpwardIcon className={'text-white'} onClick={(): void => setSelectedOrder('none')} />
+      <ArrowUpwardIcon
+        className={'text-white hover:cursor-pointer'}
+        onClick={(): void => setSelectedOrder('none')}
+      />
     );
   };
 
@@ -112,13 +123,7 @@ export const SimpleFilterTable: FC<SimpleFilterTableProps> = ({
         </div>
       ) : null}
 
-      <FilterAltIcon
-        className={'hover:cursor-pointer'}
-        onClick={(): void => {
-          if (isOpen) setIsOpen(false);
-          else setIsOpen(true);
-        }}
-      />
+      <FilterAltIcon className={'hover:cursor-pointer'} onClick={isOpen ? onClose : onClick} />
       {isOpen ? (
         <div
           className={`bg-secondary absolute  w-52 ${
@@ -130,10 +135,7 @@ export const SimpleFilterTable: FC<SimpleFilterTableProps> = ({
               <span className={'text-white text-base'}>{title}</span>
               {handleOrder()}
             </div>
-            <CloseIcon
-              className={'text-white hover:cursor-pointer'}
-              onClick={(): void => setIsOpen(false)}
-            />
+            <CloseIcon className={'text-white hover:cursor-pointer'} onClick={onClose} />
           </div>
           <Input
             color={'secondary'}

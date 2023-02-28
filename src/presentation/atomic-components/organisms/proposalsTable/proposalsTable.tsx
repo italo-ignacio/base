@@ -9,8 +9,8 @@ import {
 } from '@mui/material';
 import { SimpleFilterTable } from 'presentation/atomic-components/molecules/simple-table-filter/simple-table-filter';
 import { useState } from 'react';
-import type { FC, ReactElement } from 'react';
-import type { Filter } from 'presentation/atomic-components/molecules/simple-table-filter/simple-table-filter';
+import type { FC } from 'react';
+import type { FilterOption } from 'presentation/atomic-components/molecules/simple-table-filter/simple-table-filter';
 
 interface unity {
   cfp: number;
@@ -23,7 +23,7 @@ interface proposalStatus {
   diagnostic?: boolean;
 }
 
-interface proposal {
+export interface proposal {
   id: number;
   step: number;
   proposal: string;
@@ -37,16 +37,31 @@ interface proposal {
 
 interface ProposalsTableProps {
   proposals: proposal[];
-  filterOptions: Filter[];
+  filterOptions: FilterOption[];
   userType: 'collaborator' | 'company';
 }
 
-export const ProposalsTable: FC<ProposalsTableProps> = ({ proposals, filterOptions, userType }) => {
-  const [openFilter, setOpenFilter] = useState<ReactElement | null>();
-  const open = Boolean(openFilter);
+enum Filters {
+  Step = 'Etapa',
+  Proposal = 'Proposta',
+  Name = 'Nome',
+  TechProduct = 'Produto Tecnológico',
+  CNPJ = 'CNPJ',
+  Status = 'Status',
+  RelationShipUnity = 'Unid. Relac.',
+  ExecutingUnity = 'Unid. Exec.'
+}
 
-  const hadleClickFilter = (event: React.MouseEvent<ReactElement>): void => {
-    setOpenFilter(event.currentTarget);
+// eslint-disable-next-line max-lines-per-function
+export const ProposalsTable: FC<ProposalsTableProps> = ({ proposals, filterOptions, userType }) => {
+  const [openFilter, setOpenFilter] = useState<string | null>();
+
+  const handleClickFilter = (filter: string): void => {
+    setOpenFilter(filter);
+  };
+
+  const handleCloseFilter = (): void => {
+    setOpenFilter(null);
   };
 
   return (
@@ -57,75 +72,121 @@ export const ProposalsTable: FC<ProposalsTableProps> = ({ proposals, filterOptio
             <TableRow>
               <TableCell align={'justify'} variant={'head'}>
                 <div className={'flex justify-between'}>
-                  <span>Etapa</span>
+                  <span>{Filters.Step}</span>
                   <SimpleFilterTable
                     filterOptions={filterOptions}
                     filterSide={'right'}
-                    title={'Etapa'}
+                    isOpen={openFilter === Filters.Step}
+                    onClick={(): void => {
+                      handleClickFilter(Filters.Step);
+                    }}
+                    onClose={handleCloseFilter}
+                    title={Filters.Step}
                   />
                 </div>
               </TableCell>
               <TableCell align={'left'} variant={'head'}>
                 <div className={'flex justify-between'}>
-                  <span>Propostas</span>
-                  <SimpleFilterTable filterSide={'right'} title={'Propostas'} />
-                </div>
-              </TableCell>
-              <TableCell align={'left'} variant={'head'}>
-                <div className={'flex justify-between'}>
-                  <span>Nome</span>
+                  <span>{Filters.Proposal}</span>
                   <SimpleFilterTable
-                    filterOptions={filterOptions}
                     filterSide={'right'}
-                    title={'Nome'}
+                    isOpen={openFilter === Filters.Proposal}
+                    onClick={(): void => {
+                      handleClickFilter(Filters.Proposal);
+                    }}
+                    onClose={handleCloseFilter}
+                    title={Filters.Proposal}
                   />
                 </div>
               </TableCell>
               <TableCell align={'left'} variant={'head'}>
                 <div className={'flex justify-between'}>
-                  <span>Produto Tecnológico</span>
+                  <span>{Filters.Name}</span>
                   <SimpleFilterTable
                     filterOptions={filterOptions}
                     filterSide={'right'}
-                    title={'Produto Tecnológico'}
+                    isOpen={openFilter === Filters.Name}
+                    onClick={(): void => {
+                      handleClickFilter(Filters.Name);
+                    }}
+                    onClose={handleCloseFilter}
+                    title={Filters.Name}
                   />
                 </div>
               </TableCell>
               <TableCell align={'left'} variant={'head'}>
                 <div className={'flex justify-between'}>
-                  <span>CNPJ</span>
+                  <span>{Filters.TechProduct}</span>
                   <SimpleFilterTable
                     filterOptions={filterOptions}
                     filterSide={'right'}
-                    title={'CNPJ'}
+                    isOpen={openFilter === Filters.TechProduct}
+                    onClick={(): void => {
+                      handleClickFilter(Filters.TechProduct);
+                    }}
+                    onClose={handleCloseFilter}
+                    title={Filters.TechProduct}
+                  />
+                </div>
+              </TableCell>
+              <TableCell align={'left'} variant={'head'}>
+                <div className={'flex justify-between'}>
+                  <span>{Filters.CNPJ}</span>
+                  <SimpleFilterTable
+                    filterOptions={filterOptions}
+                    filterSide={'right'}
+                    isOpen={openFilter === Filters.CNPJ}
+                    onClick={(): void => {
+                      handleClickFilter(Filters.CNPJ);
+                    }}
+                    onClose={handleCloseFilter}
+                    title={Filters.CNPJ}
                   />
                 </div>
               </TableCell>
               {userType === 'collaborator' ? (
                 <TableCell align={'left'} variant={'head'}>
                   <div className={'flex justify-between w-full h-full'}>
-                    <span>Status</span>
-                    <SimpleFilterTable filterSide={'left'} title={'Status'} />
+                    <span>{Filters.Status}</span>
+                    <SimpleFilterTable
+                      filterSide={'left'}
+                      isOpen={openFilter === Filters.Status}
+                      onClick={(): void => {
+                        handleClickFilter(Filters.Status);
+                      }}
+                      onClose={handleCloseFilter}
+                      title={Filters.Status}
+                    />
                   </div>
                 </TableCell>
               ) : null}
               <TableCell align={'left'} variant={'head'}>
                 <div className={'flex justify-between items-center'}>
-                  <span>Unid. Relac.</span>
+                  <span>{Filters.RelationShipUnity}</span>
                   <SimpleFilterTable
                     filterOptions={filterOptions}
                     filterSide={'left'}
-                    title={'Unid. Relac.'}
+                    isOpen={openFilter === Filters.RelationShipUnity}
+                    onClick={(): void => {
+                      handleClickFilter(Filters.RelationShipUnity);
+                    }}
+                    onClose={handleCloseFilter}
+                    title={Filters.RelationShipUnity}
                   />
                 </div>
               </TableCell>
               <TableCell align={'left'} variant={'head'}>
                 <div className={'flex justify-between items-center'}>
-                  <span>Unid. Exec.</span>
+                  <span>{Filters.ExecutingUnity}</span>
                   <SimpleFilterTable
                     filterOptions={filterOptions}
                     filterSide={'left'}
-                    title={'Unid. Exec.'}
+                    isOpen={openFilter === Filters.ExecutingUnity}
+                    onClick={(): void => {
+                      handleClickFilter(Filters.ExecutingUnity);
+                    }}
+                    onClose={handleCloseFilter}
+                    title={Filters.ExecutingUnity}
                   />
                 </div>
               </TableCell>
