@@ -32,6 +32,9 @@ module.exports = {
         '.filter::-webkit-scrollbar-thumb': {
           backgroundColor: '#F3F3F3',
           borderRadius: '10px'
+        },
+        '.filter::-webkit-scrollbar': {
+          width: '6px'
         }
       });
     })

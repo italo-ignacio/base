@@ -6,6 +6,7 @@ import {
   Input,
   InputAdornment
 } from '@mui/material';
+import { IconButton as TableIconButton } from 'presentation/atomic-components/atoms/icon-button/icon-button';
 import { useState } from 'react';
 import ArrowDownwardIcon from '@mui/icons-material/ArrowDownward';
 import ArrowUpwardIcon from '@mui/icons-material/ArrowUpward';
@@ -15,9 +16,9 @@ import SearchIcon from '@mui/icons-material/Search';
 import SwapVertIcon from '@mui/icons-material/SwapVert';
 import type { FC, ReactElement } from 'react';
 
-export type Side = 'left' | 'right';
-
 type Order = 'asc' | 'desc' | 'none';
+
+export type Side = 'left' | 'right';
 export interface FilterOption {
   label: string;
   value: number;
@@ -116,14 +117,16 @@ export const SimpleFilterTable: FC<SimpleFilterTableProps> = ({
       {selectedFilters?.length ? (
         <div
           className={
-            'bg-primary w-5 h-5 rounded-full text-white flex justify-center items-center absolute mx-2 -my-3 text-[.9rem]'
+            'bg-primary w-5 h-5 rounded-full text-white flex justify-center items-center absolute left-7 top-1 z-10 text-[.9rem]'
           }
         >
           {selectedFilters.length}
         </div>
       ) : null}
-
-      <FilterAltIcon className={'hover:cursor-pointer'} onClick={isOpen ? onClose : onClick} />
+      <div className={'max-w-[40px]'}>
+        <TableIconButton icon={<FilterAltIcon />} onClick={isOpen ? onClose : onClick} />
+      </div>
+      {/* <FilterAltIcon className={'hover:cursor-pointer'} onClick={isOpen ? onClose : onClick} /> */}
       {isOpen ? (
         <div
           className={`bg-secondary absolute  w-52 ${
