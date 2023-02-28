@@ -1,5 +1,5 @@
 import { Button, Input } from '@mui/material';
-import { useLogin } from 'data/usecases/page-hooks/login/use-login';
+import { useLogin } from 'data/usecases/login/use-login';
 import { useState } from 'react';
 import AccountCircleOutlinedIcon from '@mui/icons-material/AccountCircleOutlined';
 import IconButton from '@mui/material/IconButton';

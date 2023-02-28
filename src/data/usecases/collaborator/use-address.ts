@@ -9,7 +9,8 @@ import type {
   SubmitHandler,
   UseFormGetValues,
   UseFormHandleSubmit,
-  UseFormRegister
+  UseFormRegister,
+  UseFormSetValue
 } from 'react-hook-form';
 import type { PhoneType } from 'domain/enums';
 
@@ -23,7 +24,7 @@ export const useCollaborator = (): {
     phone: {
       number: string;
       ddd: string;
-      type: NonNullable<PhoneType | undefined>;
+      type: PhoneType;
     };
     unities: (number | undefined)[];
   }>;
@@ -36,7 +37,7 @@ export const useCollaborator = (): {
     phone: {
       number: string;
       ddd: string;
-      type: NonNullable<PhoneType | undefined>;
+      type: PhoneType;
     };
     unities: (number | undefined)[];
   }>;
@@ -52,7 +53,20 @@ export const useCollaborator = (): {
     phone: {
       number: string;
       ddd: string;
-      type: NonNullable<PhoneType | undefined>;
+      type: PhoneType;
+    };
+    unities: (number | undefined)[];
+  }>;
+  setValue: UseFormSetValue<{
+    specialties?: (number | undefined)[] | undefined;
+    email: string;
+    name: string;
+    nif: string;
+    password: string;
+    phone: {
+      number: string;
+      ddd: string;
+      type: PhoneType;
     };
     unities: (number | undefined)[];
   }>;
@@ -61,10 +75,10 @@ export const useCollaborator = (): {
     handleSubmit,
     register,
     getValues,
+    setValue,
     formState: { errors },
     control
   } = useForm<CreateCollaboratorRequest>({
-    mode: 'onChange',
     resolver: yupResolver(collaboratorSchema)
   });
 
@@ -76,6 +90,7 @@ export const useCollaborator = (): {
     getValues,
     handleSubmit,
     onSubmit,
-    register
+    register,
+    setValue
   };
 };

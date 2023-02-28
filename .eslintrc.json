@@ -822,6 +822,12 @@
       }
     },
     {
+      "files": ["src/domain/enums/**/*.ts"],
+      "rules": {
+        "no-magic-numbers": "off"
+      }
+    },
+    {
       "files": ["src/data/**/*.ts"],
       "rules": {
         "react-hooks/exhaustive-deps": "off"

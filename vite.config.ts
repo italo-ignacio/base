@@ -34,6 +34,10 @@ export default defineConfig({
       {
         find: 'validations',
         replacement: resolve(__dirname, 'src/validations')
+      },
+      {
+        find: 'store',
+        replacement: resolve(__dirname, 'src/store')
       }
     ]
   }

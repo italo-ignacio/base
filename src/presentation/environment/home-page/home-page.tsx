@@ -12,8 +12,8 @@ import { Textarea } from 'presentation/atomic-components/atoms/textarea/textarea
 import { dataArray } from 'main/mock/mandala';
 import { options } from 'main/utils/items';
 import { useGetAllUsersQuery } from 'infra/cache/queries';
-import { useModal } from 'data/usecases/use-modal';
-import { usePagination, useSearch } from 'data/usecases';
+import { useModal } from 'data/hooks/use-modal';
+import { usePagination, useSearch } from 'data/hooks';
 import { useReactToPrint } from 'react-to-print';
 import { useRef, useState } from 'react';
 import Checkbox from '@mui/material/Checkbox';

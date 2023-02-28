@@ -10,6 +10,7 @@ interface LabelInputProps {
   register?: UseFormRegisterReturn;
   label?: string;
   type?: string;
+  mask?: string;
   required?: boolean;
   children?: ReactNode;
   error?: boolean;
@@ -30,7 +31,6 @@ export const LabelInput: FC<LabelInputProps> = ({ register, children, ...props }
 
     {children || (
       <Input
-        {...register}
         endAdornment={
           props.EndIcon ? (
             <InputAdornment position={'end'}>
@@ -64,6 +64,7 @@ export const LabelInput: FC<LabelInputProps> = ({ register, children, ...props }
           paddingRight: props.handleEndFunction ? '0px' : '0.4rem'
         }}
         type={props.type}
+        {...register}
       />
     )}
   </div>

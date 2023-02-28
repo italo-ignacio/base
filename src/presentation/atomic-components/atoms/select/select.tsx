@@ -16,6 +16,10 @@ type SelectProps = TextFieldProps & {
   change: (value: string) => void;
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   reference: RefCallback<any>;
+  defaultValue: {
+    label: string;
+    value: string;
+  };
 };
 
 interface OptionProps {
@@ -34,10 +38,11 @@ export const Select: FC<SelectProps> = ({
     clearOnEscape
     clearText={'Limpar'}
     closeText={'Fechar'}
+    defaultValue={props.defaultValue}
     disableCloseOnSelect={isMultiple}
     disablePortal
     fullWidth
-    id={'combo-box-demo'}
+    isOptionEqualToValue={(option, value): boolean => option?.value === value?.value}
     loadingText={'Carregando...'}
     multiple={isMultiple}
     noOptionsText={'Nenhum dado encontrado'}

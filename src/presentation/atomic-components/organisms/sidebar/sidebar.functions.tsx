@@ -2,7 +2,7 @@ import { IconButton } from 'presentation/atomic-components/atoms/icon-button/ico
 import { paths } from 'main/config';
 
 import { useNavigate } from 'react-router-dom';
-import { usePath } from 'data/usecases';
+import { usePath } from 'data/hooks';
 import AssignmentIcon from '@mui/icons-material/Assignment';
 import BusinessCenterIcon from '@mui/icons-material/BusinessCenter';
 import DashboardIcon from '@mui/icons-material/Dashboard';

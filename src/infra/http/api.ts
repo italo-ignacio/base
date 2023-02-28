@@ -1,6 +1,6 @@
-type routes = '/users';
+export type routes = '/users';
 
-interface ApiProps {
+export interface ApiProps {
   route: routes;
   body?: unknown;
   id?: string;
@@ -25,7 +25,7 @@ const apiFunction = async <T>(params: ApiProps): Promise<T> => {
     }
   );
 
-  return api.json().then((data) => data);
+  return api.json();
 };
 
 export const api = {

@@ -3,15 +3,16 @@ import { mixed, object, string } from 'yup';
 import type { InferType } from 'yup';
 
 const defaultValues = {
-  dddLength: 3,
+  dddMaxLength: 3,
+  dddMinLength: 2,
   maxLength: 9,
   minLength: 8
 };
 
 export const phoneSchema = object().shape({
   ddd: string()
-    .min(defaultValues.dddLength)
-    .max(defaultValues.dddLength)
+    .min(defaultValues.dddMinLength)
+    .max(defaultValues.dddMaxLength)
     .required()
     .transform((value) => value.replace(/\D/gmu, ''))
     .matches(/\d/gmu),
