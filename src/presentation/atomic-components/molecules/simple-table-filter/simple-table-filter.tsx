@@ -15,14 +15,14 @@ import SearchIcon from '@mui/icons-material/Search';
 import SwapVertIcon from '@mui/icons-material/SwapVert';
 import type { FC, ReactElement } from 'react';
 
-type Side = 'left' | 'right';
+export type Side = 'left' | 'right';
 
 type Order = 'asc' | 'desc' | 'none';
 export interface FilterOption {
   label: string;
   value: number;
 }
-interface SimpleFilterTableProps {
+export interface SimpleFilterTableProps {
   filterSide: Side;
   title: string;
   filterOptions?: FilterOption[];
@@ -171,6 +171,7 @@ export const SimpleFilterTable: FC<SimpleFilterTableProps> = ({
                     control={<Checkbox color={'secondary'} size={'small'} />}
                     label={filter.label}
                     onClick={(): void => handleFilterOptionClick(filter)}
+                    title={'filter'}
                     value={filter.value}
                   />
                 ))}
