@@ -12,11 +12,11 @@ type SelectProps = TextFieldProps & {
   isMultiple?: boolean;
   options: Values[];
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  field: any;
-  change: (value: string) => void;
+  field?: any;
+  change?: (value: string) => void;
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  reference: RefCallback<any>;
-  defaultValue: {
+  reference?: RefCallback<any>;
+  defaultValue?: {
     label: string;
     value: string;
   };
@@ -49,8 +49,9 @@ export const Select: FC<SelectProps> = ({
     onChange={(e, data): void => {
       const Data = data as Values;
 
-      if (Data?.value) change(Data.value);
-      else change('');
+      if (change)
+        if (Data?.value) change(Data.value);
+        else change('');
     }}
     openText={'Abrir'}
     options={options}

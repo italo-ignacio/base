@@ -34,7 +34,7 @@ export const LoginForm: FC = () => {
         color={'secondary'}
         endAdornment={
           <InputAdornment position={'end'}>
-            <IconButton onClick={handleClickShowPassword}>
+            <IconButton onClick={handleClickShowPassword} tabIndex={-1}>
               {values ? <VisibilityOff /> : <Visibility />}
             </IconButton>
           </InputAdornment>

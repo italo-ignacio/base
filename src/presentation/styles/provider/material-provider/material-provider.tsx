@@ -44,7 +44,7 @@ export const MaterialUIProvider: FC<Children> = ({ children }: Children) => {
         defaultProps: {
           style: {
             alignItems: 'center',
-            borderRadius: '999px',
+            borderRadius: '8px',
             display: 'flex',
             flexDirection: 'row',
             fontFamily: 'Montserrat',
@@ -419,7 +419,6 @@ export const MaterialUIProvider: FC<Children> = ({ children }: Children) => {
         defaultProps: {
           color: 'primary',
           style: {
-            background: '#FAFAFA',
             borderTopLeftRadius: '2px',
             borderTopRightRadius: '2px',
             paddingLeft: '2px'
@@ -480,6 +479,7 @@ export const MaterialUIProvider: FC<Children> = ({ children }: Children) => {
                 cursor: 'pointer'
               },
               '.MuiInputBase-root': {
+                background: 'transparent !important',
                 borderBottom: '0px solid black !important',
                 flexWrap: 'wrap',
                 maxWidth: '100%',
@@ -500,7 +500,6 @@ export const MaterialUIProvider: FC<Children> = ({ children }: Children) => {
                 borderBottom: '0px solid black !important',
                 cursor: 'pointer'
               },
-              background: 'transparent !important',
               input: {
                 display: 'none'
               },

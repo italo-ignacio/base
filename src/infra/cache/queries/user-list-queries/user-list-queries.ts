@@ -9,16 +9,16 @@ interface userProps {
 
 export interface getAllUsersQueryProps {
   page: number;
-  searchUser?: string;
+  search?: string;
 }
 
 export const useGetAllUsersQuery = ({
   page,
-  searchUser
+  search
 }: getAllUsersQueryProps): UseQueryResult<userProps[]> =>
-  useQuery([['users', page, searchUser]], () =>
+  useQuery([['users', page, search]], () =>
     api.get({
-      queryParams: { limit: 10, page, search: searchUser },
+      queryParams: { limit: 10, page, search },
       route: '/users'
     })
   );

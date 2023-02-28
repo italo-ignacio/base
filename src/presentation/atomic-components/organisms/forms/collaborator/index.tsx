@@ -1,7 +1,8 @@
-import { Button, Input } from '@mui/material';
+import { Button, Grow, Input } from '@mui/material';
 import { Controller } from 'react-hook-form';
 import { LabelInput } from 'presentation/atomic-components/atoms/label-input';
 import { Select } from 'presentation/atomic-components/atoms/select/select';
+import { ValidatePassword } from 'presentation/atomic-components/atoms/validate-password';
 import { useCollaborator } from 'data/usecases/collaborator/use-address';
 import { useEffect, useState } from 'react';
 import AccountCircleOutlinedIcon from '@mui/icons-material/AccountCircleOutlined';
@@ -35,29 +36,46 @@ export const CollaboratorForm: FC = () => {
   }, [getValues, setValue]);
 
   const [visible, setVisible] = useState(false);
+  const [visibleFocus, setVisibleFocus] = useState(false);
 
   const handleClickShowPassword = (): void => {
     setVisible(!visible);
+    console.log(errors.password);
   };
 
   return (
-    <form className={'flex flex-col justify-center gap-4'} onSubmit={handleSubmit(onSubmit)}>
+    <form className={'flex flex-col justify-center gap-4 z-20'} onSubmit={handleSubmit(onSubmit)}>
       <LabelInput
         StartIcon={AccountCircleOutlinedIcon}
         error={!!errors.email}
         label={'Email'}
         register={register('email')}
       />
-
-      <LabelInput
-        EndIcon={visible ? VisibilityOff : Visibility}
-        StartIcon={KeyOutlinedIcon}
-        error={!!errors.password}
-        handleEndFunction={handleClickShowPassword}
-        label={'Senha'}
-        register={register('password')}
-        type={visible ? 'text' : 'password'}
-      />
+      <div className={'z-20'}>
+        <LabelInput
+          EndIcon={visible ? VisibilityOff : Visibility}
+          StartIcon={KeyOutlinedIcon}
+          error={!!errors.password}
+          handleEndFunction={handleClickShowPassword}
+          label={'Senha'}
+          onChange={(e): void => setValue('password', e.target.value, { shouldValidate: true })}
+          onFocus={(): void => {
+            if (!visibleFocus) setVisibleFocus(true);
+          }}
+          onFocusOut={(): void => {
+            if (visibleFocus) setVisibleFocus(false);
+          }}
+          register={register('password')}
+          type={visible ? 'text' : 'password'}
+        />
+      </div>
+      <div className={'z-10'} hidden={!visibleFocus}>
+        <Grow in={visibleFocus}>
+          <div>
+            <ValidatePassword password={getValues('password')} />
+          </div>
+        </Grow>
+      </div>
       <LabelInput error={!!errors.name} label={'Nome'} register={register('name')} />
       <LabelInput error={!!errors.nif} label={'NIF'} register={register('nif')} />
       <div className={'flex gap-4'}>
@@ -68,7 +86,7 @@ export const CollaboratorForm: FC = () => {
               name={'phone.ddd'}
               render={({ field: { onChange: handleChange, ...field } }): ReactElement => (
                 <MaskedInput
-                  mask={'999'}
+                  mask={'(099)'}
                   maskPlaceholder={''}
                   onChange={handleChange}
                   value={field.value}

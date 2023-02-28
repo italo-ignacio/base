@@ -338,7 +338,11 @@ export const HomePage: FC = () => {
 
         <div className={'flex flex-col p-6 gap-2 justify-center md:flex-row'}>
           <div className={'flex flex-col gap-2'}>
-            <Textarea onChange={(e): void => setSearch(e.target.value)} value={search} />
+            <Textarea
+              onChange={(e): void => setSearch(e.target.value)}
+              value={search}
+              valueInput={search}
+            />
           </div>
         </div>
         <div className={'flex flex-col justify-center items-center gap-4'}>

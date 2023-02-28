@@ -5,9 +5,10 @@ import type { TextFieldProps } from '@mui/material';
 
 type TextareaProps = TextFieldProps & {
   maxLength?: number;
+  valueInput: string;
 };
 
-export const Textarea: FC<TextareaProps> = ({ maxLength, ...props }) => {
+export const Textarea: FC<TextareaProps> = ({ maxLength, valueInput, ...props }) => {
   const [inputLength, setInputLength] = useState(`0/${maxLength}`);
 
   return (
@@ -19,9 +20,7 @@ export const Textarea: FC<TextareaProps> = ({ maxLength, ...props }) => {
         maxRows={3}
         minRows={3}
         multiline
-        onChange={(value): void =>
-          setInputLength(`${value.target.value.length.toString()}/${maxLength}`)
-        }
+        onKeyUpCapture={(): void => setInputLength(`${valueInput.length.toString()}/${maxLength}`)}
         variant={'standard'}
         {...props}
       />
