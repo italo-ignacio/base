@@ -208,8 +208,8 @@ export const MaterialUIProvider: FC<Children> = ({ children }: Children) => {
         defaultProps: {
           color: 'primary',
           style: {
-            fontFamily: 'Montserrat',
-            fontSize: 'clamp(.7rem, .8vw, 1.3rem)'
+            backgroundColor: '#FAFAFA',
+            fontFamily: 'Montserrat'
           }
         },
         variants: [
@@ -259,6 +259,7 @@ export const MaterialUIProvider: FC<Children> = ({ children }: Children) => {
               ':hover:before': {
                 borderBottom: `1.5px solid ${colors.white}`
               },
+              backgroundColor: `${colors.secondary} !important`,
               borderBottom: `1px solid ${colors.white}`,
               color: colors.white,
               svg: {
@@ -284,7 +285,6 @@ export const MaterialUIProvider: FC<Children> = ({ children }: Children) => {
               ':hover:before': {
                 borderBottom: `1.5px solid ${colors.error} !important`
               },
-              borderBottom: `1px solid ${colors.error} !important`,
 
               svg: {
                 color: `${colors.error} !important`
@@ -382,8 +382,7 @@ export const MaterialUIProvider: FC<Children> = ({ children }: Children) => {
           style: {
             color: `${colors.gray}`,
             fontFamily: 'Montserrat',
-            fontSize: 'clamp(.7rem, .8vw, 1.3rem)',
-            overflowWrap: 'anywhere'
+            fontSize: 'clamp(.7rem, .8vw, 1.3rem)'
           },
           variant: 'body'
         },
@@ -396,7 +395,15 @@ export const MaterialUIProvider: FC<Children> = ({ children }: Children) => {
               color: `${colors.secondary} !important`,
               fontSize: 'clamp(.8rem, .9vw, 1.5rem) !important',
               fontWeight: 'bold',
-              overflowWrap: 'revert-layer !important'
+              overflowWrap: 'revert-layer'
+            }
+          },
+          {
+            props: {
+              variant: 'body'
+            },
+            style: {
+              overflowWrap: 'anywhere'
             }
           }
         ]

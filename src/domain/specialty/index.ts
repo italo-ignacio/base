@@ -4,7 +4,3 @@ export interface Specialty {
   createdAt: string;
   updatedAt: string;
 }
-
-export interface CreateSpecialtyRequest {
-  name: string;
-}

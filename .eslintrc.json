@@ -111,7 +111,7 @@
     "@typescript-eslint/no-redundant-type-constituents": "off",
     "@typescript-eslint/no-require-imports": "error",
     "@typescript-eslint/no-restricted-imports": ["error", { "patterns": ["../"] }],
-    "@typescript-eslint/no-shadow": "off",
+    "@typescript-eslint/no-shadow": "error",
     "@typescript-eslint/no-this-alias": "error",
     "@typescript-eslint/no-throw-literal": "off",
     "@typescript-eslint/no-type-alias": [
@@ -685,7 +685,7 @@
     "no-self-compare": "error",
     "no-sequences": "error",
     "no-setter-return": "error",
-    "no-shadow": "error",
+    "no-shadow": "off",
     "no-shadow-restricted-names": "error",
     "no-sparse-arrays": "error",
     "no-tabs": "error",
@@ -813,7 +813,10 @@
       }
     },
     {
-      "files": ["src/presentation/atomic-components/atoms/**/*.tsx"],
+      "files": [
+        "src/presentation/atomic-components/atoms/**/*.tsx",
+        "src/presentation/atomic-components/organisms/**/*.tsx"
+      ],
       "rules": {
         "react/jsx-props-no-spreading": "off"
       }

@@ -2,6 +2,7 @@ import {
   AsIsToBePage,
   AuthPage,
   EnterprisesPage,
+  FormsPage,
   HomePage,
   ProposalPage,
   ToolboxPage
@@ -22,22 +23,16 @@ const RouterConfig: FC = () => (
 
         <Route element={<CoreContainer />}>
           <Route element={<HomePage />} path={paths.home} />
-        </Route>
 
-        <Route element={<CoreContainer />}>
           <Route element={<ProposalPage />} path={paths.proposal} />
-        </Route>
 
-        <Route element={<CoreContainer />}>
           <Route element={<EnterprisesPage />} path={paths.enterprises} />
-        </Route>
 
-        <Route element={<CoreContainer />}>
           <Route element={<ToolboxPage />} path={paths.toolbox} />
-        </Route>
 
-        <Route element={<CoreContainer />}>
           <Route element={<AsIsToBePage />} path={paths.AsIsToBe} />
+
+          <Route element={<FormsPage />} path={paths.forms} />
         </Route>
       </Routes>
     </Suspense>
