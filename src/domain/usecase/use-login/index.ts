@@ -11,13 +11,6 @@ export interface AuthenticationResponse {
   role: Role;
 }
 
-export interface HookFormParams {
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  navigate: any;
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  useForm: any;
-}
-
 export interface AuthenticationClass {
   login: (params: AuthenticationParams) => Promise<AuthenticationResponse>;
 }

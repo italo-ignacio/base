@@ -3,6 +3,7 @@ import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import type { CreateCollaboratorRequest } from 'validations/schemas/collaborator';
 
+import { api } from 'infra/http';
 import type {
   Control,
   FieldErrors,
@@ -26,7 +27,7 @@ export const useCollaborator = (): {
       ddd: string;
       type: PhoneType;
     };
-    unities: (number | undefined)[];
+    unities: number[];
   }>;
   errors: FieldErrors<{
     specialties?: (number | undefined)[] | undefined;
@@ -39,7 +40,7 @@ export const useCollaborator = (): {
       ddd: string;
       type: PhoneType;
     };
-    unities: (number | undefined)[];
+    unities: number[];
   }>;
   register: UseFormRegister<CreateCollaboratorRequest>;
   onSubmit: SubmitHandler<CreateCollaboratorRequest>;
@@ -55,7 +56,7 @@ export const useCollaborator = (): {
       ddd: string;
       type: PhoneType;
     };
-    unities: (number | undefined)[];
+    unities: number[];
   }>;
   setValue: UseFormSetValue<{
     specialties?: (number | undefined)[] | undefined;
@@ -68,7 +69,7 @@ export const useCollaborator = (): {
       ddd: string;
       type: PhoneType;
     };
-    unities: (number | undefined)[];
+    unities: number[];
   }>;
 } => {
   const {
@@ -82,7 +83,11 @@ export const useCollaborator = (): {
     resolver: yupResolver(collaboratorSchema)
   });
 
-  const onSubmit: SubmitHandler<CreateCollaboratorRequest> = (data) => console.log(data);
+  const onSubmit: SubmitHandler<CreateCollaboratorRequest> = (data) =>
+    api.post({
+      body: data,
+      route: '/collaborators'
+    });
 
   return {
     control,

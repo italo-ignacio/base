@@ -97,8 +97,8 @@ export const HomePage: FC = () => {
     setAnimation(undefined);
     setRotation(rotation);
 
-    // eslint-disable-next-line no-loops/no-loops, @typescript-eslint/prefer-for-of, no-plusplus
-    for (let index = 0; index < data.length; index++)
+    // eslint-disable-next-line no-loops/no-loops, @typescript-eslint/prefer-for-of
+    for (let index = 0; index < data.length; index += 1)
       // eslint-disable-next-line no-loop-func
       setTimeout(() => {
         if (position < dataArray.length - 1) position += 1;

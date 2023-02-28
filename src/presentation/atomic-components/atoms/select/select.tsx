@@ -1,21 +1,25 @@
 import { Autocomplete, Chip, TextField } from '@mui/material';
 import CloseIcon from '@mui/icons-material/Close';
 import type { FC, ReactNode, RefCallback } from 'react';
+import type { Noop } from 'react-hook-form';
 import type { TextFieldProps } from '@mui/material';
 
 interface Values {
-  label: string;
-  value: string;
+  label: number | string;
+  value: number | string;
 }
 
 type SelectProps = TextFieldProps & {
   isMultiple?: boolean;
   options: Values[];
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  field?: any;
-  change?: (value: string) => void;
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  reference?: RefCallback<any>;
+  field?: {
+    name?: string;
+    onBlur?: Noop;
+    onChange?: () => void;
+    value?: (number | string | undefined)[] | number | string;
+  };
+  change?: (value: (number | string)[] | number | string | undefined) => void;
+  reference?: RefCallback<HTMLInputElement>;
   defaultValue?: {
     label: string;
     value: string;
@@ -47,11 +51,19 @@ export const Select: FC<SelectProps> = ({
     multiple={isMultiple}
     noOptionsText={'Nenhum dado encontrado'}
     onChange={(e, data): void => {
-      const Data = data as Values;
+      if (isMultiple) {
+        const Data = data as Values[];
 
-      if (change)
-        if (Data?.value) change(Data.value);
-        else change('');
+        if (change)
+          if (Data) change(Data.map((v) => Number(v.value)));
+          else change(undefined);
+      } else {
+        const Data = data as Values;
+
+        if (change)
+          if (Data?.value) change(Data.value);
+          else change(undefined);
+      }
     }}
     openText={'Abrir'}
     options={options}
@@ -66,6 +78,7 @@ export const Select: FC<SelectProps> = ({
             {...props}
             {...field}
             inputRef={reference}
+            onChange={(): void => {}}
           />
           <TextField InputProps={{ startAdornment }} color={'isSelect'} />
         </>

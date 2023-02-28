@@ -3,6 +3,7 @@ import { phoneSchema } from 'validations/schemas/phone';
 import type { InferType } from 'yup';
 
 const defaultValues = {
+  minUnities: 1,
   nameMaxLength: 100,
   nameMinLength: 2,
   passwordMaxLength: 24,
@@ -20,7 +21,7 @@ export const collaboratorSchema = object().shape({
     .required(),
   phone: phoneSchema,
   specialties: array().of(number()),
-  unities: array().of(number()).required()
+  unities: array().of(number().required()).min(defaultValues.minUnities).required()
 });
 
 export type CreateCollaboratorRequest = InferType<typeof collaboratorSchema>;
