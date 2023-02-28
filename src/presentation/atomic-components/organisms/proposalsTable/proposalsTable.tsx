@@ -9,7 +9,7 @@ import {
 } from '@mui/material';
 import { SimpleFilterTable } from 'presentation/atomic-components/molecules/simple-table-filter/simple-table-filter';
 import type { FC } from 'react';
-import type { Filter } from 'presentation/atomic-components/molecules/simple-table-filter/simple-table-filter';
+import type { FilterOption } from 'presentation/atomic-components/molecules/simple-table-filter/simple-table-filter';
 
 interface unity {
   cfp: number;
@@ -22,7 +22,7 @@ interface proposalStatus {
   diagnostic?: boolean;
 }
 
-interface proposal {
+export interface proposal {
   id: number;
   step: number;
   proposal: string;
@@ -36,7 +36,7 @@ interface proposal {
 
 interface ProposalsTableProps {
   proposals: proposal[];
-  filterOptions: Filter[];
+  filterOptions: FilterOption[];
   userType: 'collaborator' | 'company';
 }
 

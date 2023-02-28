@@ -1,30 +1,8 @@
 import { HeaderCoreContainer } from 'presentation/atomic-components/molecules/header-core-container/header-core-container';
 import { ProposalsTable } from 'presentation/atomic-components/organisms/proposalsTable/proposalsTable';
 import type { FC } from 'react';
-import type { Filter } from 'presentation/atomic-components/molecules/simple-table-filter/simple-table-filter';
-
-interface unity {
-  cfp: number;
-  name: string;
-}
-
-interface proposalStatus {
-  conclusionRecord: boolean;
-  sgset: boolean;
-  diagnostic?: boolean;
-}
-
-interface proposal {
-  id: number;
-  step: number;
-  proposal: string;
-  name: string;
-  techProduct: string;
-  cnpj: string;
-  status: proposalStatus;
-  relationshipUnity: unity;
-  executingUnity: unity;
-}
+import type { FilterOption } from 'presentation/atomic-components/molecules/simple-table-filter/simple-table-filter';
+import type { proposal } from 'presentation/atomic-components/organisms/proposalsTable/proposalsTable';
 
 const proposalsData: proposal[] = [
   {
@@ -132,7 +110,7 @@ const proposalsData: proposal[] = [
     techProduct: 'Planejamento Estratégico Tecnológico'
   }
 ];
-const filterOptions: Filter[] = [
+const filterOptions: FilterOption[] = [
   { label: 'Lorena Ipsula 1', value: 1 },
   { label: 'Lorena Ipsula 2', value: 2 },
   { label: 'Lorena Ipsula 3', value: 3 },
