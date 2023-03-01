@@ -1,5 +1,5 @@
 import { Button, Input } from '@mui/material';
-import { useLogin } from 'data/usecases/page-hooks/login/use-login';
+import { useLogin } from 'data/usecases/login/use-login';
 import { useState } from 'react';
 import AccountCircleOutlinedIcon from '@mui/icons-material/AccountCircleOutlined';
 import IconButton from '@mui/material/IconButton';
@@ -34,7 +34,7 @@ export const LoginForm: FC = () => {
         color={'secondary'}
         endAdornment={
           <InputAdornment position={'end'}>
-            <IconButton onClick={handleClickShowPassword}>
+            <IconButton onClick={handleClickShowPassword} tabIndex={-1}>
               {values ? <VisibilityOff /> : <Visibility />}
             </IconButton>
           </InputAdornment>

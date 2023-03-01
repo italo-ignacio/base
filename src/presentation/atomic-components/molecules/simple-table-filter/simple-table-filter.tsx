@@ -27,9 +27,9 @@ export interface SimpleFilterTableProps {
   filterSide: Side;
   title: string;
   filterOptions?: FilterOption[];
-  isOpen: boolean;
-  onClick: () => void;
-  onClose: () => void;
+  isOpen?: boolean;
+  onClick?: () => void;
+  onClose?: () => void;
 }
 
 // eslint-disable-next-line max-lines-per-function

@@ -3,13 +3,15 @@ import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import type { CreateCollaboratorRequest } from 'validations/schemas/collaborator';
 
+import { api } from 'infra/http';
 import type {
   Control,
   FieldErrors,
   SubmitHandler,
   UseFormGetValues,
   UseFormHandleSubmit,
-  UseFormRegister
+  UseFormRegister,
+  UseFormSetValue
 } from 'react-hook-form';
 import type { PhoneType } from 'domain/enums';
 
@@ -23,9 +25,9 @@ export const useCollaborator = (): {
     phone: {
       number: string;
       ddd: string;
-      type: NonNullable<PhoneType | undefined>;
+      type: PhoneType;
     };
-    unities: (number | undefined)[];
+    unities: number[];
   }>;
   errors: FieldErrors<{
     specialties?: (number | undefined)[] | undefined;
@@ -36,9 +38,9 @@ export const useCollaborator = (): {
     phone: {
       number: string;
       ddd: string;
-      type: NonNullable<PhoneType | undefined>;
+      type: PhoneType;
     };
-    unities: (number | undefined)[];
+    unities: number[];
   }>;
   register: UseFormRegister<CreateCollaboratorRequest>;
   onSubmit: SubmitHandler<CreateCollaboratorRequest>;
@@ -52,23 +54,40 @@ export const useCollaborator = (): {
     phone: {
       number: string;
       ddd: string;
-      type: NonNullable<PhoneType | undefined>;
+      type: PhoneType;
     };
-    unities: (number | undefined)[];
+    unities: number[];
+  }>;
+  setValue: UseFormSetValue<{
+    specialties?: (number | undefined)[] | undefined;
+    email: string;
+    name: string;
+    nif: string;
+    password: string;
+    phone: {
+      number: string;
+      ddd: string;
+      type: PhoneType;
+    };
+    unities: number[];
   }>;
 } => {
   const {
     handleSubmit,
     register,
     getValues,
+    setValue,
     formState: { errors },
     control
   } = useForm<CreateCollaboratorRequest>({
-    mode: 'onChange',
     resolver: yupResolver(collaboratorSchema)
   });
 
-  const onSubmit: SubmitHandler<CreateCollaboratorRequest> = (data) => console.log(data);
+  const onSubmit: SubmitHandler<CreateCollaboratorRequest> = (data) =>
+    api.post({
+      body: data,
+      route: '/collaborators'
+    });
 
   return {
     control,
@@ -76,6 +95,7 @@ export const useCollaborator = (): {
     getValues,
     handleSubmit,
     onSubmit,
-    register
+    register,
+    setValue
   };
 };

@@ -1,5 +1,5 @@
 import { LabelInput } from 'presentation/atomic-components/atoms/label-input';
-import { useAddress } from 'data/usecases/page-hooks/address/use-address';
+import { useAddress } from 'data/usecases/address/use-address';
 import Button from '@mui/material/Button';
 import type { FC } from 'react';
 

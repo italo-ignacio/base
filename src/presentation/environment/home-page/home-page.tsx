@@ -12,8 +12,8 @@ import { Textarea } from 'presentation/atomic-components/atoms/textarea/textarea
 import { dataArray } from 'main/mock/mandala';
 import { options } from 'main/utils/items';
 import { useGetAllUsersQuery } from 'infra/cache/queries';
-import { useModal } from 'data/usecases/use-modal';
-import { usePagination, useSearch } from 'data/usecases';
+import { useModal } from 'data/hooks/use-modal';
+import { usePagination, useSearch } from 'data/hooks';
 import { useReactToPrint } from 'react-to-print';
 import { useRef, useState } from 'react';
 import Checkbox from '@mui/material/Checkbox';
@@ -97,8 +97,8 @@ export const HomePage: FC = () => {
     setAnimation(undefined);
     setRotation(rotation);
 
-    // eslint-disable-next-line no-loops/no-loops, @typescript-eslint/prefer-for-of, no-plusplus
-    for (let index = 0; index < data.length; index++)
+    // eslint-disable-next-line no-loops/no-loops, @typescript-eslint/prefer-for-of
+    for (let index = 0; index < data.length; index += 1)
       // eslint-disable-next-line no-loop-func
       setTimeout(() => {
         if (position < dataArray.length - 1) position += 1;
@@ -338,7 +338,11 @@ export const HomePage: FC = () => {
 
         <div className={'flex flex-col p-6 gap-2 justify-center md:flex-row'}>
           <div className={'flex flex-col gap-2'}>
-            <Textarea onChange={(e): void => setSearch(e.target.value)} value={search} />
+            <Textarea
+              onChange={(e): void => setSearch(e.target.value)}
+              value={search}
+              valueInput={search}
+            />
           </div>
         </div>
         <div className={'flex flex-col justify-center items-center gap-4'}>

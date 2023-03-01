@@ -2,8 +2,8 @@ import { IconButton as IconButtonUI } from '@mui/material';
 import type { FC, ReactNode } from 'react';
 
 interface IconButtonProps {
-  onClick?: () => void;
   icon: ReactNode;
+  onClick?: () => void;
   selected?: boolean;
   disabled?: boolean;
   color?: 'primary' | 'secondary';

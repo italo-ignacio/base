@@ -1,6 +1,12 @@
-type routes = '/users';
+export type routes =
+  | '/collaborators'
+  | '/companies'
+  | '/specialties'
+  | '/unities'
+  | '/users'
+  | 'none';
 
-interface ApiProps {
+export interface ApiProps {
   route: routes;
   body?: unknown;
   id?: string;
@@ -14,18 +20,22 @@ interface ApiProps {
 
 const apiFunction = async <T>(params: ApiProps): Promise<T> => {
   const api = await fetch(
-    `https://63f75efd833c7c9c60828761.mockapi.io/api/v1${params.route}${
+    `https://jtd2-server-develop.azurewebsites.net/api/v2${params.route}${
       params.id ? `/${params.id}` : ''
     }${
       params.queryParams ? `?${new URLSearchParams(params.queryParams as { search: string })}` : ''
     }`.replace(/undefined/gu, ''),
     {
       body: JSON.stringify(params.body),
+      headers: {
+        Accept: 'application/json, text/plain',
+        'Content-Type': 'application/json;charset=UTF-8'
+      },
       method: params.method
     }
   );
 
-  return api.json().then((data) => data);
+  return api.json();
 };
 
 export const api = {

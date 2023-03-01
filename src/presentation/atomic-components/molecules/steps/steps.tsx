@@ -1,4 +1,4 @@
-import { useWindowDimensions } from 'data/usecases';
+import { useWindowDimensions } from 'data/hooks';
 
 import { colors } from 'presentation/styles/palettes';
 import Divider from '@mui/material/Divider';

@@ -1,8 +1,12 @@
+import { login } from 'store/auth/thunk';
 import { loginSchema } from 'validations/schemas/login';
 import { paths } from 'main/config';
+import { useAppSelector } from 'store';
+import { useDispatch } from 'react-redux';
 import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
 import { yupResolver } from '@hookform/resolvers/yup';
+import type { AnyAction } from '@reduxjs/toolkit';
 import type {
   FieldErrors,
   SubmitHandler,
@@ -17,7 +21,11 @@ export const useLogin = (): {
   onSubmit: SubmitHandler<LoginRequest>;
   handleSubmit: UseFormHandleSubmit<LoginRequest>;
 } => {
+  const dispatch = useDispatch();
+  const { authData, authLoading } = useAppSelector((state) => state.auth);
   const navigate = useNavigate();
+
+  console.log(authData, authLoading);
 
   const {
     handleSubmit,
@@ -28,7 +36,7 @@ export const useLogin = (): {
   });
 
   const onSubmit: SubmitHandler<LoginRequest> = (data) => {
-    console.log(data);
+    dispatch(login(data) as unknown as AnyAction);
     navigate(paths.home);
   };
 

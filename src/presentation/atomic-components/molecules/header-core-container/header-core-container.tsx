@@ -1,7 +1,7 @@
 import { Breadcrumbs } from '@mui/material';
 import { colors } from 'presentation/styles/palettes';
 import { useNavigate } from 'react-router-dom';
-import { usePath } from 'data/usecases';
+import { usePath } from 'data/hooks';
 import type { FC } from 'react';
 
 interface HeaderCoreContainerProps {

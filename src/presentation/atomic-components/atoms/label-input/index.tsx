@@ -10,6 +10,7 @@ interface LabelInputProps {
   register?: UseFormRegisterReturn;
   label?: string;
   type?: string;
+  mask?: string;
   required?: boolean;
   children?: ReactNode;
   error?: boolean;
@@ -17,6 +18,9 @@ interface LabelInputProps {
   handleEndFunction?: () => void;
   StartIcon?: OverridableComponent<SvgIconTypeMap>;
   handleStartFunction?: () => void;
+  onChange?: (e: { target: { value: string } }) => void;
+  onFocus?: () => void;
+  onFocusOut?: () => void;
 }
 
 export const LabelInput: FC<LabelInputProps> = ({ register, children, ...props }) => (
@@ -30,12 +34,11 @@ export const LabelInput: FC<LabelInputProps> = ({ register, children, ...props }
 
     {children || (
       <Input
-        {...register}
         endAdornment={
           props.EndIcon ? (
             <InputAdornment position={'end'}>
               {props.handleEndFunction ? (
-                <IconButton onClick={props.handleEndFunction}>
+                <IconButton onClick={props.handleEndFunction} tabIndex={-1}>
                   <props.EndIcon />
                 </IconButton>
               ) : (
@@ -49,7 +52,7 @@ export const LabelInput: FC<LabelInputProps> = ({ register, children, ...props }
           props.StartIcon ? (
             <InputAdornment position={'start'}>
               {props.handleStartFunction ? (
-                <IconButton onClick={props.handleStartFunction}>
+                <IconButton onClick={props.handleStartFunction} tabIndex={-1}>
                   <props.StartIcon />
                 </IconButton>
               ) : (
@@ -64,6 +67,10 @@ export const LabelInput: FC<LabelInputProps> = ({ register, children, ...props }
           paddingRight: props.handleEndFunction ? '0px' : '0.4rem'
         }}
         type={props.type}
+        {...register}
+        onBlur={props.onFocusOut}
+        onChange={props.onChange ? props.onChange : register?.onChange}
+        onFocus={props.onFocus}
       />
     )}
   </div>
