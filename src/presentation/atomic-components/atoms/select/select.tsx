@@ -4,7 +4,7 @@ import type { FC, ReactNode, RefCallback } from 'react';
 import type { Noop } from 'react-hook-form';
 import type { TextFieldProps } from '@mui/material';
 
-interface Values {
+export interface Values {
   label: number | string;
   value: number | string;
 }
@@ -21,8 +21,8 @@ type SelectProps = TextFieldProps & {
   change?: (value: (number | string)[] | number | string | undefined) => void;
   reference?: RefCallback<HTMLInputElement>;
   defaultValue?: {
-    label: string;
-    value: string;
+    label: number | string;
+    value: number | string;
   };
 };
 
