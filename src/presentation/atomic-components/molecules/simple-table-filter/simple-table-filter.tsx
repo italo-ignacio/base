@@ -131,7 +131,7 @@ export const SimpleFilterTable: FC<SimpleFilterTableProps> = ({
         <div
           className={`bg-secondary absolute  w-52 ${
             filterOptions ? 'h-80' : 'h-max'
-          } rounded-xl p-4 flex flex-col gap-3 ${filterSide === 'left' ? '-ml-48' : null} `}
+          } rounded-xl p-4 flex flex-col gap-3 ${filterSide === 'left' ? '-ml-48' : '-ml-14'} `}
         >
           <div className={'flex items-center justify-between w-full'}>
             <div className={'flex gap-1 items-center'}>

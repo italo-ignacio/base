@@ -1,6 +1,6 @@
 import { Select } from 'presentation/atomic-components/atoms/select/select';
 import { IconButton as TableIconButton } from 'presentation/atomic-components/atoms/icon-button/icon-button';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import CloseIcon from '@mui/icons-material/Close';
 import FilterAltIcon from '@mui/icons-material/FilterAlt';
 import type { FC } from 'react';
@@ -13,7 +13,7 @@ export interface ProposalStatusFilterTableProps {
 }
 
 enum Filters {
-  conclusionRecord = 'Registro de conclusão',
+  conclusionRecord = 'Reg. de conclusão',
   sgset = 'SGSET',
   diagnostic = 'Diagnóstico'
 }
@@ -33,11 +33,6 @@ const filterOptions: Values[] = [
   }
 ];
 
-const initialStatus: Values = {
-  label: 'Todos',
-  value: 'all'
-};
-
 export const ProposalStatusFilterTable: FC<ProposalStatusFilterTableProps> = ({
   isOpen,
   onClick,
@@ -54,9 +49,11 @@ export const ProposalStatusFilterTable: FC<ProposalStatusFilterTableProps> = ({
     setSelectedSgsetStatus('all');
   };
 
-  useEffect(() => {
-    console.log(selectedConclusionRecordStatus);
-  }, [selectedConclusionRecordStatus]);
+  const findDefaultValue = (value: string): Values | undefined => {
+    const finded = filterOptions.find((option): boolean | undefined => option.value === value);
+
+    return finded;
+  };
 
   return (
     <div className={'w[4px] h[3px] relative'}>
@@ -72,8 +69,7 @@ export const ProposalStatusFilterTable: FC<ProposalStatusFilterTableProps> = ({
       </div>
       {isOpen ? (
         <div
-          className={`bg-secondary absolute  w-52 h-80
-          } rounded-xl p-4 flex flex-col gap-3`}
+          className={'bg-secondary absolute  w-52 h-80 -ml-16 rounded-xl p-4 flex flex-col gap-3'}
         >
           <div className={'flex items-center justify-between w-full'}>
             <span className={'text-white text-base'}>Status</span>
@@ -81,15 +77,14 @@ export const ProposalStatusFilterTable: FC<ProposalStatusFilterTableProps> = ({
           </div>
           <div className={'flex flex-col gap-4'}>
             <div>
-              <span className={'text-white'}>{Filters.conclusionRecord}</span>
+              <span className={'text-white text-sm'}>{Filters.conclusionRecord}</span>
               <Select
                 change={(value): void => {
                   setSelectedConclusionRecordStatus(value as string);
                 }}
-                defaultChecked={filterOptions.find(
-                  (option): boolean => option.value === selectedConclusionRecordStatus
-                )}
+                defaultValue={findDefaultValue(selectedConclusionRecordStatus)}
                 options={filterOptions}
+                value={selectedConclusionRecordStatus}
               />
             </div>
             <div>
@@ -98,7 +93,7 @@ export const ProposalStatusFilterTable: FC<ProposalStatusFilterTableProps> = ({
                 change={(value): void => {
                   setSelectedDiagnosticStatus(value as string);
                 }}
-                defaultValue={initialStatus}
+                defaultValue={findDefaultValue(selectedDiagnosticStatus)}
                 options={filterOptions}
               />
             </div>
@@ -108,7 +103,8 @@ export const ProposalStatusFilterTable: FC<ProposalStatusFilterTableProps> = ({
                 change={(value): void => {
                   setSelectedSgsetStatus(value as string);
                 }}
-                defaultValue={initialStatus}
+                color={'primary'}
+                defaultValue={findDefaultValue(selectedSgsetStatus)}
                 options={filterOptions}
               />
             </div>
@@ -118,7 +114,10 @@ export const ProposalStatusFilterTable: FC<ProposalStatusFilterTableProps> = ({
               className={
                 'text-white text-xs font-extralight underline hover:font-light hover:cursor-pointer'
               }
-              onClick={(): void => cleanFilter()}
+              onClick={(): void => {
+                cleanFilter();
+                onClose();
+              }}
               type={'button'}
             >
               <span>Limpar filtros</span>
