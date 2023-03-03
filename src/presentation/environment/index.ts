@@ -5,3 +5,4 @@ export * from './toolbox-page/toolbox-page';
 export * from './as-is-to-be-page/as-is-to-be-page';
 export * from './enterprises-page/enterprises-page';
 export * from './forms-page';
+export * from './specialties-page/specialties-page';

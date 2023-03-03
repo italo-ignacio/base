@@ -5,5 +5,6 @@ export const paths = {
   home: '/homepage',
   login: '/',
   proposal: '/proposal',
+  specialties: '/specialties',
   toolbox: '/proposal/enterprises/toolbox'
 };

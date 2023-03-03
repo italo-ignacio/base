@@ -9,6 +9,7 @@ import {
 } from 'presentation/environment';
 import { AuthContainer, CoreContainer } from 'presentation/atomic-components/templates';
 import { BrowserRouter, Outlet, Route, Routes } from 'react-router-dom';
+import { SpecialtiesPage } from 'presentation/environment/specialties-page/specialties-page';
 import { Suspense } from 'react';
 import { paths } from 'main/config';
 import type { FC } from 'react';
@@ -33,6 +34,7 @@ const RouterConfig: FC = () => (
           <Route element={<AsIsToBePage />} path={paths.AsIsToBe} />
 
           <Route element={<FormsPage />} path={paths.forms} />
+          <Route element={<SpecialtiesPage />} path={paths.specialties} />
         </Route>
       </Routes>
     </Suspense>

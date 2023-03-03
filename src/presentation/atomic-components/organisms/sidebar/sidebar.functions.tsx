@@ -40,7 +40,7 @@ const items: itemsProps[] = [
   {
     hideFor: ['adminLocal', 'consutor', 'empresa'],
     icon: <EmojiEventsIcon />,
-    link: ''
+    link: paths.specialties
   },
   {
     hideFor: ['empresa'],
