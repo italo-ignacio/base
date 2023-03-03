@@ -15,7 +15,7 @@ export const authRequests = {
         email,
         password
       },
-      route: 'users'
+      route: '/users'
     });
 
     return data;

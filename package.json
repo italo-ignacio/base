@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "vite --host",
     "build": "tsc && vite build",
-    "preview": "vite preview",
+    "preview": "vite preview --host",
     "install:clean:windows": "rmdir node_modules & del package-lock.json & del yarn.lock & yarn install"
   },
   "dependencies": {

@@ -24,7 +24,7 @@ interface LabelInputProps {
 }
 
 export const LabelInput: FC<LabelInputProps> = ({ register, children, ...props }) => (
-  <div className={'flex flex-col w-full text-start'}>
+  <div className={'flex flex-col w-full text-start font-montserrat'}>
     {props.label ? (
       <label className={'mb-[2px]'}>
         {props.label}

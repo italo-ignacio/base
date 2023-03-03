@@ -8,11 +8,12 @@ import {
   TableRow
 } from '@mui/material';
 import { HeaderCoreContainer } from 'presentation/atomic-components/molecules/header-core-container/header-core-container';
+import { LabelInput } from 'presentation/atomic-components/atoms/label-input';
 import { Modal } from 'presentation/atomic-components/molecules/modal/modal';
 import { TableHeaderItemWithSimpleFilter } from 'presentation/atomic-components/molecules/table-header-item-with-simple-filter/table-header-item-with-simple-filter';
-import { Visibility } from '@mui/icons-material';
 import { useModal } from 'data/hooks/use-modal';
 import { useState } from 'react';
+import AddIcon from '@mui/icons-material/Add';
 import type { FC } from 'react';
 
 interface Specialty {
@@ -61,65 +62,72 @@ export const SpecialtiesPage: FC = () => {
   } = useModal();
 
   return (
-    <div className={'w-auto h-auto'}>
+    <div className={'w-auto h-auto flex flex-col'}>
       <HeaderCoreContainer
         hasBreadcrumbs={false}
         subTitle={'JORNADA DE TRANSFORMAÇÃO DIGITAL'}
         title={'ESPECIALIDADES'}
       />
-      <div>
-        <Modal
-          button={{
-            StartIcon: Visibility,
-            title: 'Abrir modal',
-            variant: 'secondary'
-          }}
-          closeModal={closeSecondModal}
-          isOpen={isOpenSecondModal}
-          openModal={openSecondModal}
-          size={'small'}
-          title={'Modal'}
-        >
-          <Button
-            endIcon={<Visibility />}
-            onClick={(): void => {
-              closeSecondModal();
+      <div className={'flex flex-col  mt-6'}>
+        <div>
+          <Modal
+            button={{
+              EndIcon: AddIcon,
+              title: 'Nova',
+              variant: 'primary'
             }}
-            variant={'secondary'}
+            closeModal={closeSecondModal}
+            isOpen={isOpenSecondModal}
+            openModal={openSecondModal}
+            size={'small'}
+            title={'Nova Especialidade'}
           >
-            fechar modal
-          </Button>
-        </Modal>
-      </div>
-      <div>
-        <TableContainer className={'bg-white'}>
-          <Table aria-label={'simple table'} sx={{ minWidth: 650 }}>
-            <TableHead>
-              <TableRow>
-                <TableCell align={'justify'} variant={'head'}>
-                  <TableHeaderItemWithSimpleFilter
-                    filterSide={'left'}
-                    isOpen={openFilter === 'Nome'}
-                    onClick={(): void => {
-                      handleClickFilter('Nome');
-                    }}
-                    onClose={handleCloseFilter}
-                    title={'Nome'}
-                  />
-                </TableCell>
-              </TableRow>
-            </TableHead>
-            <TableBody>
-              {specialties.map((specialty) => (
-                <TableRow key={specialty.id} className={'uppercase'}>
-                  <TableCell align={'left'} component={'th'} scope={'row'}>
-                    {specialty.name}
+            <LabelInput label={'Nome'} />
+            <Button
+              className={'font-montserrat'}
+              onClick={(): void => {
+                closeSecondModal();
+              }}
+              size={'small'}
+              variant={'primary'}
+            >
+              Cadastrar
+            </Button>
+          </Modal>
+        </div>
+        <div>
+          <TableContainer className={'bg-white'}>
+            <Table aria-label={'simple table'} sx={{ minWidth: 650 }}>
+              <TableHead>
+                <TableRow>
+                  <TableCell align={'justify'} variant={'head'}>
+                    <TableHeaderItemWithSimpleFilter
+                      filterSide={'left'}
+                      isOpen={openFilter === 'Nome'}
+                      onClick={(): void => {
+                        handleClickFilter('Nome');
+                      }}
+                      onClose={handleCloseFilter}
+                      title={'Nome'}
+                    />
                   </TableCell>
                 </TableRow>
-              ))}
-            </TableBody>
-          </Table>
-        </TableContainer>
+              </TableHead>
+              <TableBody>
+                {specialties.map((specialty) => (
+                  <TableRow
+                    key={specialty.id}
+                    className={'hover:bg-bg hover:cursor-pointer transition-colors uppercase'}
+                  >
+                    <TableCell align={'left'} component={'th'} scope={'row'}>
+                      {specialty.name}
+                    </TableCell>
+                  </TableRow>
+                ))}
+              </TableBody>
+            </Table>
+          </TableContainer>
+        </div>
       </div>
     </div>
   );

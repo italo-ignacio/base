@@ -173,7 +173,10 @@ export const ProposalsTable: FC<ProposalsTableProps> = ({ proposals, filterOptio
           </TableHead>
           <TableBody>
             {proposals.map((item) => (
-              <TableRow key={item.id} className={'uppercase'}>
+              <TableRow
+                key={item.id}
+                className={'hover:bg-bg hover:cursor-pointer transition-colors uppercase'}
+              >
                 <TableCell align={'left'} component={'th'} scope={'row'}>
                   {item.step}
                 </TableCell>
