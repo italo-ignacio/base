@@ -12,7 +12,7 @@ export const TableHeaderItemWithSimpleFilter: FC<TableHeaderItemWithSimpleFilter
   onClick,
   onClose
 }) => (
-  <div className={'flex justify-between items-center'}>
+  <div className={'flex justify-between items-center h-6'}>
     <span>{title}</span>
     <SimpleFilterTable
       filterOptions={filterOptions}

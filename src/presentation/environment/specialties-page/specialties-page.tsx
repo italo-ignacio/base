@@ -9,12 +9,16 @@ import {
 } from '@mui/material';
 import { HeaderCoreContainer } from 'presentation/atomic-components/molecules/header-core-container/header-core-container';
 import { LabelInput } from 'presentation/atomic-components/atoms/label-input';
+import { MenuTable } from 'presentation/atomic-components/molecules/menu-table/menu-table';
 import { Modal } from 'presentation/atomic-components/molecules/modal/modal';
 import { TableHeaderItemWithSimpleFilter } from 'presentation/atomic-components/molecules/table-header-item-with-simple-filter/table-header-item-with-simple-filter';
 import { useModal } from 'data/hooks/use-modal';
 import { useState } from 'react';
 import AddIcon from '@mui/icons-material/Add';
+import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
+import ModeEditOutlinedIcon from '@mui/icons-material/ModeEditOutlined';
 import type { FC } from 'react';
+import type { Option } from 'presentation/atomic-components/molecules/menu-table/menu-table';
 
 interface Specialty {
   id: number;
@@ -41,6 +45,21 @@ const specialties: Specialty[] = [
   {
     id: 5,
     name: 'Eletrônica'
+  }
+];
+
+const onClick = (): void => console.log('123r');
+
+const options: Option[] = [
+  {
+    action: 'Editar',
+    icon: ModeEditOutlinedIcon,
+    onClick
+  },
+  {
+    action: 'Excluir',
+    icon: DeleteOutlineIcon,
+    onClick
   }
 ];
 
@@ -99,8 +118,8 @@ export const SpecialtiesPage: FC = () => {
           <TableContainer className={'bg-white'}>
             <Table aria-label={'simple table'} sx={{ minWidth: 650 }}>
               <TableHead>
-                <TableRow>
-                  <TableCell align={'justify'} variant={'head'}>
+                <TableRow className={'h-1'}>
+                  <TableCell align={'justify'} className={'h-1'} variant={'head'}>
                     <TableHeaderItemWithSimpleFilter
                       filterSide={'left'}
                       isOpen={openFilter === 'Nome'}
@@ -120,7 +139,10 @@ export const SpecialtiesPage: FC = () => {
                     className={'hover:bg-bg hover:cursor-pointer transition-colors uppercase'}
                   >
                     <TableCell align={'left'} component={'th'} scope={'row'}>
-                      {specialty.name}
+                      <div className={'flex justify-between items-center'}>
+                        <span>{specialty.name}</span>
+                        <MenuTable options={options} />
+                      </div>
                     </TableCell>
                   </TableRow>
                 ))}
